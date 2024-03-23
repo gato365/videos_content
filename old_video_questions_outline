@@ -1,0 +1,147 @@
+## Data Science Hackathon Video Series Outline
+
+### **Video 1: Introduction to the Data Science Hackathon**
+
+#### Overview of the Hackathon Process
+
+The Data Science Hackathon is designed to engage high school students in the practical aspects of data science through a focused competition. Over the course of two weekends, participants will undergo a learning phase through instructional videos and can get help from mentors, followed by a weekend dedicated to applying their new skills in a hackathon format. This process aims to not only introduce students to the field of data science but also to challenge them to solve real-world problems using data from interesting domains like Spotify and sports.
+
+#### Core Objectives of the Hackathon
+
+1. **Igniting a Passion for Data Science: ** Launch high school students on an exhilarating journey into the world of programming and data science, setting the stage for future innovations and discoveries.
+
+2. **Hands-On Experience with Authentic Data: ** Dive deep into the vast ocean of real-world data, where students will learn to navigate, analyze, and extract valuable insights from genuine datasets from intriguing domains like Spotify and sports.
+
+3. **Collaboration and Mentorship: ** Foster a dynamic environment where students engage in an interactive project alongside mentors from Cal Poly. This collaboration is designed to bridge theoretical knowledge with practical application, encouraging students to solve complex problems through teamwork and expert guidance.
+
+#### Foundational Skills in Programming and Data Science
+
+Participants will gain essential skills in:
+- Basic programming concepts and syntax, likely using R.
+- Data manipulation and analysis using packages like dplyr and stringr (for R).
+- Data visualization techniques using ggplot2 (for R).
+- Understanding of how to approach data science problems from hypothesis to insight.
+
+#### Introduction to Posit Cloud and Its Role in the Hackathon
+
+Posit Cloud serves as the primary platform for the hackathon, providing an accessible, web-based environment for coding. It offers:
+- An integrated development environment (IDE) for R and Python, removing the need for local software installation.
+- Easy access to project workspaces, facilitating seamless collaboration among participants.
+- A platform for mentors to share code snippets, instructional materials, and feedback in real-time.
+
+#### How to Use Posit
+
+Participants will learn to:
+- Navigate the Posit Cloud interface to create and manage projects.
+- Utilize the IDE for writing and executing code.
+- Share projects with mentors for review and collaboration.
+- Deploy applications or visualizations directly from Posit Cloud.
+
+#### Mentorship and Support Available
+
+Mentorship plays a crucial role in the hackathon, with support provided by:
+- College students and professionals in data science, offering guidance through office hours and discussion forums.
+- Structured feedback sessions, where participants can present their progress and receive constructive advice.
+- Access to a repository of resources, including tutorials, datasets, and examples specifically curated for the hackathon challenges.
+
+#### Quiz Engagement
+
+- Complementing each video, you'll find a quiz designed to sharpen your newly acquired skills.
+- Enjoy the freedom of unlimited attempts to ensure mastery of the material.
+- Don't hesitate to reach out to your mentors for assistance and insights.
+
+
+
+### **Video 2: Understanding Data Types & Data Structures in R**
+   - Explanation of numeric types.
+   - Discussion of characters/strings.
+   - Introduction to vectors and data frames.
+
+<!-- ### **Video 4: Working with Data in R** -->
+<!--    - Utilizing Quarto and the tidyverse package. -->
+<!--    - Navigating panes in RStudio. -->
+### **Video 3: Extraction, Transformation, and Visualization 1: Excel Data (Movies Data)**
+   - Reading Excel files with read_xlsx().
+   - Employing select() and mutate() functions.
+   - Creating histograms with ggplot2() & geom_histogram().
+
+   
+ 
+### **Video 4: Extraction, Transformation, and Visualization 2: Wiki Data**
+   - Using htmltabs for data extraction.
+   - Filtering data with filter().
+   - Summarizing data with group_by() & summarise().
+   - Visualizing data with ggplot2(), geom_bar() & geom_point().
+   
+There is a package called htmltab which uses htmltab function to get html tables, the function takes an argument called `which` to denote the table to extract from the html page
+   
+
+Use this url as a sample url https://en.wikipedia.org/wiki/List_of_counties_in_California
+
+
+--------------------------------------------------------------------------------------
+
+### **Video 7: Extraction, Transformation, and Visualization 3A: Spotify Data**
+   - Retrieving artist audio features with get_artist_audio_features().
+   - Selecting, grouping, and summarizing data.
+   - Filtering data and visualizing with ggplot2(), geom_point() & geom_volin().
+
+### **Video 8: Extraction, Transformation, and Visualization 3B: Spotify Data**
+   - Continued work with get_artist_audio_features().
+   - Advanced data manipulation with select() and mutate().
+   - Filtering and visualizing data with ggplot2(), geom_point() & geom_volin().
+
+### **Video 9: Extraction, Transformation, and Visualization 4A: Sports Data**
+   - Creating a sports data library with get_football().
+   - Selecting, mutating, and filtering data.
+   - Visualizing sports data with ggplot2(), geom_point() & geom_line().
+
+### **Video 10: Extraction, Transformation, and Visualization 4B: Sports Data**
+   - Creating a sports data library with get_basketball().
+   - Selecting, grouping, summarizing, and filtering data.
+   - Visualizing basketball data with ggplot2(), geom_point() & geom_line().
+   
+   
+   
+   
+## Video specifications
+
+Less than 10 minutes; Between 8 to 10 minutes
+
+What did we learn aspect of the video or even notes?
+
+Include intro video for each video with a little bit of hip-hop and the beginning.
+
+Make the video exciting regarding getting the data and transforming it. In other words, I’m thinking of making the purpose of ETV regarding the video resonate with a question a student would ask about data.
+
+Consistent thumb clip of data science image that’s captivating
+
+Make videos in such a way that I can easily sell them to summer camps
+
+include a sort of "appendix"/ glossary in the description of the video or in some type of handout given to participants of the hackathon that has the definitions for key terms such as "string" , "data frame" or "console". This way, if a student needs clarification on something they don't have to replay the video, they can reference the appendix. Not sure if this would always be helpful or how experienced the students are with R-Studio,
+
+I’m thinking that I would like Students) to be able to either click on a description within YouTube or within the quiz that takes them to this glossary
+
+Maybe use the GIFS that start 331 uses to display The action of the dplyr verbs
+
+Let this glossary be a website
+
+summary of the tools we used at the end of the series, or something like a "you learned how to..." Make this list cumulative after each video so that students are able to see how much they were able to accomplish
+
+## Data science hackathon video questions
+
+10 to 15 questions per video
+
+most questions are coding questions, however, some questions ask Students) what is the purpose of certain functions
+
+Ask Students) to correct the code so that it works
+
+Or even change the code, so it does something a little different
+
+or even realizations are even specifications of data types
+
+Let questions be cumulative in difficulty, as well as reviewer in concepts from previous videos, so that students have a solidified understanding when they do the actual hackathon
+
+Multiple-choice, coding, multiple answer
+
+If there is a way for us to store their data within a secure database, that would be fantastic

@@ -1,0 +1,232 @@
+## NBA
+
+
+```{r}
+library(tidyverse)
+library(gato365dsh2024)
+```
+
+
+
+1a. **Age Distribution of Players**: How does the age distribution look across all players, and which age group is most prevalent?
+   - *Manipulation*: Group the players by age and count the number of players in each age group.
+   - *Visualization*: Create a histogram to display the age distribution.
+   
+   
+```{r}
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(age_group) %>%  # Group by age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq)) +  # Plot age_group on x-axis and frequency on y-axis
+  geom_bar(stat = "identity", fill = "steelblue") +  # Use bar chart
+  labs(title = "Age Distribution of NBA Players in 2023", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_custom()
+```
+   
+  
+1b. **Age and Position Distribution of Players**: How does the age distribution look across all players conditioned on position?
+   
+   
+```{r}
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(position = str_split(position, "-", simplify = TRUE)[,1]) %>% 
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(position, age_group) %>%  # Group by position and age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq, fill = position)) +  # Plot age_group on x-axis and frequency on y-axis, fill by position
+  geom_bar(stat = "identity", position = "dodge") +  # Use bar chart with bars side-by-side
+  labs(title = "Age Distribution of NBA Players in 2023 by Position", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_bw() +  # Use black & white theme
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title
+```
+   
+   
+
+2. **Average Performance by Position**: What is the average field goal percentage for each position (SG, PF, PG, C)?
+   - *Manipulation*: Calculate the average field goal percentage for each position.
+   - *Visualization*: Use a bar chart to compare the average field goal percentages by position.
+
+3. **Player Efficiency**: Which players have an effective field goal percentage greater than 50% while also playing more than 20 games?
+   - *Manipulation*: Filter players who have an effective field goal percentage greater than 0.5 and have played more than 20 games.
+   - *Visualization*: Create a scatter plot with minutes played on the x-axis and effective field goal percentage on the y-axis, highlighting the players who meet the criteria.
+
+4. **Three-Point Specialists**: Who are the top 10 players with the highest three-point field goal percentage and at least 50 three-point field goal attempts?
+   - *Manipulation*: Filter players with at least 50 three-point field goal attempts and sort them by their three-point field goal percentage in descending order to find the top 10.
+   - *Visualization*: Display the top 10 players using a horizontal bar chart with players' names on the y-axis and their three-point field goal percentage on the x-axis.
+
+5. **Player Stamina**: Is there a correlation between the number of games played and the average minutes played per game?
+   - *Manipulation*: Calculate the average minutes played per game for each player and then assess the correlation with the number of games played.
+   - *Visualization*: Plot a correlation matrix or use a scatter plot to visualize the relationship between games played and average minutes per game.
+
+
+
+## NFL - Passing
+
+1. **Quarterback Age Profile**: What is the distribution of quarterbacks' ages, and which age has the most quarterbacks?
+   - *Manipulation*: Group the quarterbacks by age and count the number of quarterbacks in each age group.
+   - *Visualization*: Create a histogram to display the age distribution of quarterbacks.
+   
+
+
+2. **Team Performance**: Which team has the highest average yards gained by passing, and how does it compare across all teams?
+   - *Manipulation*: Calculate the average yards gained by passing for each team.
+   - *Visualization*: Use a bar chart to compare the average yards gained by passing across teams.
+   
+
+```{r}
+passing_stats_df %>% 
+  group_by(tm) %>%  # Group by team
+  summarise(avg_yards = mean(yds_gained_by_passing, na.rm = TRUE)) %>%  # Calculate average yards gained by passing for each team
+  ggplot(aes(x = reorder(tm, avg_yards), y = avg_yards)) +  # Plot teams on x-axis and average yards on y-axis
+  geom_bar(stat = "identity", fill = "steelblue") +  # Use bar chart
+  coord_flip() +  # Flip the coordinates to make the chart horizontal
+  labs(title = "Average Yards Gained by Passing per Team", x = "Team", y = "Average Yards") +  # Add labels
+  theme_bw() +  # Use black & white theme
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title
+```
+   
+
+3. **Touchdown to Interception Ratio**: Which quarterbacks have a touchdown to interception ratio greater than 2?
+   - *Manipulation*: Calculate the touchdown to interception ratio for each quarterback and filter those with a ratio greater than 2.
+   - *Visualization*: Create a scatter plot with touchdowns on the x-axis and interceptions on the y-axis, highlighting quarterbacks who meet the criteria.
+   
+   
+```{r}
+passing_stats_df %>% 
+  distinct(.,.keep_all = TRUE) %>% 
+  filter(year == 2023) %>% 
+  select(player,int,td)  %>% 
+  mutate(td_per_int = ifelse(int == 0, NA, td/int)) %>% 
+  filter(td_per_int <=4 & td_per_int >=1) %>% 
+  arrange(td_per_int) %>% 
+  mutate(player = factor(player, levels = unique(player))) %>% 
+  ggplot(aes(x=player, y = td_per_int)) +
+  geom_point() + 
+  geom_text(aes(label=round(td_per_int, 2)), hjust=-0.1, vjust=-0.5) +
+  labs(x = "Player", y = "TD/INT Ratio", title = "TD/INT Ratio for Each Player in 2023") +
+  coord_flip() +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+   
+   
+   
+   
+   
+
+4. **Passing Efficiency**: Who are the top 5 quarterbacks with the highest passer rating who have played at least 10 games?
+   - *Manipulation*: Filter quarterbacks who have played at least 10 games and sort them by their passer rating in descending order to find the top 5.
+   - *Visualization*: Display the top 5 quarterbacks using a horizontal bar chart with quarterbacks' names on the y-axis and their passer rating on the x-axis.
+
+5. **Longest Pass Analysis**: Is there a correlation between the longest pass and the yards per game?
+   - *Manipulation*: Assess the correlation between the longest pass and the yards per game for each quarterback.
+   - *Visualization*: Plot a correlation matrix or use a scatter plot to visualize the relationship between the longest pass and yards per game.
+
+
+## Spotify
+
+
+
+1. **Artist Album Release Patterns**: How has the number of albums released by each artist changed over the years?
+   - *Manipulation*: Group the data by artist and album release year, then count the number of albums.
+   - *Visualization*: Create a line graph showing the number of albums released per year for each artist.
+   
+```{r}
+all_artists_df %>% 
+  # distinct(artist, album, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
+  group_by(artist_name, album_release_year) %>%  # Group by artist and album year
+  summarise(count = n()) %>%  # Count the number of albums
+  ggplot(aes(x = album_release_year, y = count, group = artist_name, color = artist_name)) +  # Plot album_year on x-axis and count on y-axis, group and color by artist
+  geom_line() +  # Use line graph
+  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Albums") +  # Add labels
+  theme_bw() +  # Use black & white theme
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title
+```
+
+   
+   
+   
+   
+
+2. **Danceability and Energy Correlation**: Is there a correlation between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
+   - *Manipulation*: Calculate the correlation coefficient between danceability and energy.
+   - *Visualization*: Use a scatter plot to visualize the correlation between danceability and energy.
+   
+```{r}
+all_artists_df %>% 
+  select(artist_name, energy,danceability) %>% 
+  filter(artist_name %in% c("Dua Lipa","Billie Eilish")) %>% 
+  ggplot(aes(x = energy, y = danceability, color = artist_name)) +
+  geom_point() +
+  geom_vline(xintercept = 0.5) +
+  geom_hline(yintercept = 0.5) +
+  xlim(0,1) +
+  ylim(0,1)+
+  theme_bw()
+```
+   
+   
+2b. Bind the rows of dua lipa and billie ellish together, select as before then see what happens
+   
+
+
+
+
+
+
+
+
+
+3. **Key Distribution**: What is the distribution of musical keys used in the tracks?
+   - *Manipulation*: Count the frequency of each key across all tracks.
+   - *Visualization*: Display the key distribution using a bar chart.
+
+
+
+
+4. **Loudness Across Albums**: How does loudness vary across different albums Justin Bieber?
+   - *Manipulation*: Group the data by artist and album, then calculate the average loudness for each album.
+   - *Visualization*: Use a box plot to compare the loudness across albums for each artist.
+   
+   
+   
+```{r}
+justin_bieber_df %>% 
+  group_by(album_name) %>% 
+  summarize(loudness_mean = mean(loudness,na.rm = TRUE)) %>% 
+  ggplot(aes(x = album_name, y = loudness_mean)) +
+  geom_point() +
+  coord_flip()
+  # theme(axis.text.x = element_text(angle = 45))
+  
+```
+
+
+5. **Speechiness in Genres**: Does speechiness vary significantly across different artists, potentially indicating different genres or styles?
+   - *Manipulation*: Group the data by artist and calculate the average speechiness.
+   - *Visualization*: Create a bar chart to compare the average speechiness by artist.
+
+6. **Acousticness Over Time**: How has the acousticness of tracks changed over time for a particular artist?
+   - *Manipulation*: Group the data by artist and album release year, then calculate the average acousticness.
+   - *Visualization*: Plot a line graph showing the change in acousticness over time for the artist.
+
+7. **Valence and Tempo Relationship**: How does valence relate to tempo within tracks of high danceability?
+   - *Manipulation*: Filter tracks with high danceability and assess the relationship between valence and tempo.
+   - *Visualization*: Create a scatter plot with valence on the x-axis and tempo on the y-axis for high danceability tracks.
+
+8. **Track Duration Comparison**: How do track durations compare among the top tracks of each artist?
+   - *Manipulation*: Identify the top tracks for each artist based on a metric (e.g., popularity) and compare their durations.
+   - *Visualization*: Use a histogram to show the distribution of track durations for the top tracks.
+
+9. **Explicit Content Analysis**: What percentage of tracks from each artist contains explicit content?
+   - *Manipulation*: Calculate the proportion of tracks marked as explicit for each artist.
+   - *Visualization*: Display the percentage of explicit tracks using a pie chart for each artist.
+
+10. **Mode Preference**: Do certain artists prefer major or minor keys for their tracks?
+    - *Manipulation*: Count the number of tracks in major versus minor keys for each artist.
+    - *Visualization*: Use a stacked bar chart to show the preference for major or minor keys by artist.
+
+

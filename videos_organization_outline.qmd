@@ -1,0 +1,1147 @@
+
+
+
+
+
+
+Here is the organized outline for the 17 instructional videos for the Data Science Hackathon:
+
+Based on the image provided, here is an outline of the modules, parts, and concepts planned for the weekends of the hackathon:
+
+
+
+
+```{r}
+library(gato365dsh2024)
+```
+
+
+## Weekend 1 Outline
+
+### **Module 0 (M0)**
+- Introduction and Overview
+
+
+#### Overview of the Hackathon Process
+
+The Data Science Hackathon is designed to engage high school students in the practical aspects of data science through a focused competition. Over the course of two weekends, participants will undergo a learning phase through instructional videos and can get help from mentors, followed by a weekend dedicated to applying their new skills in a hackathon format. This process aims to not only introduce students to the field of data science but also to challenge them to solve real-world problems using data from interesting domains like Spotify and sports.
+
+#### Core Objectives of the Hackathon
+
+1. **Igniting a Passion for Data Science: ** Launch high school students on an exhilarating journey into the world of programming and data science, setting the stage for future innovations and discoveries.
+
+2. **Hands-On Experience with Authentic Data: ** Dive deep into the vast ocean of real-world data, where students will learn to navigate, analyze, and extract valuable insights from genuine datasets from intriguing domains like Spotify and sports.
+
+3. **Collaboration and Mentorship: ** Foster a dynamic environment where students engage in an interactive project alongside mentors from Cal Poly. This collaboration is designed to bridge theoretical knowledge with practical application, encouraging students to solve complex problems through teamwork and expert guidance.
+
+#### Foundational Skills in Programming and Data Science
+
+Participants will gain essential skills in:
+- Basic programming concepts and syntax, likely using R.
+- Data manipulation and analysis using packages like dplyr and stringr (for R).
+- Data visualization techniques using ggplot2 (for R).
+- Understanding of how to approach data science problems from hypothesis to insight.
+
+#### Introduction to Posit Cloud and Its Role in the Hackathon
+
+Posit Cloud serves as the primary platform for the hackathon, providing an accessible, web-based environment for coding. It offers:
+- An integrated development environment (IDE) for R and Python, removing the need for local software installation.
+- Easy access to project workspaces, facilitating seamless collaboration among participants.
+- A platform for mentors to share code snippets, instructional materials, and feedback in real-time.
+
+#### How to Use Posit
+
+Participants will learn to:
+- Navigate the Posit Cloud interface to create and manage projects.
+- Utilize the IDE for writing and executing code.
+- Share projects with mentors for review and collaboration.
+- Deploy applications or visualizations directly from Posit Cloud.
+
+#### Mentorship and Support Available
+
+Mentorship plays a crucial role in the hackathon, with support provided by:
+- College students and professionals in data science, offering guidance through office hours and discussion forums.
+- Structured feedback sessions, where participants can present their progress and receive constructive advice.
+- Access to a repository of resources, including tutorials, datasets, and examples specifically curated for the hackathon challenges.
+
+#### Quiz Engagement
+
+- Complementing each video, you'll find a quiz designed to sharpen your newly acquired skills.
+- Enjoy the freedom of unlimited attempts to ensure mastery of the material.
+- Don't hesitate to reach out to your mentors for assistance and insights.
+
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+#### ----------------------------------
+
+
+
+
+
+
+
+### **Module 1 (M1)**
+
+**How does this tie to the journey?**
+Version 1:
+These topics tie into the data science learning journey by providing the foundational tools and frameworks necessary for data manipulation, analysis, and visualization. Understanding how to install and utilize R packages enables learners to efficiently process and analyze large datasets, apply statistical models, and generate insightful visualizations, which are critical skills in the field of data science.
+
+Version 2:
+
+"Hey there! So, these topics we're talking about are super important if you're interested in data science—that's like being a detective, but for numbers and patterns. Learning how to use R, which is a special tool for data science, is like learning how to use a new app on your phone. It helps you sort through tons of information, find cool trends, and make those awesome graphs and charts you see in science fairs. It's all about making sense of the data and telling a story with it. Pretty neat, right?" 😄📊
+
+
+
+#### **Part 1 (P1)** Basics of what is R
+
+##### Concept 1: R and R Studio
+
+- What is R?
+- Solution: R is a programming language and environment designed for     
+statistical computing and graphics.
+
+- What is R Studio?
+- Solution: RStudio is an integrated development environment (IDE) that 
+provides a user-friendly interface for working with R.  
+
+- Why R Studio?
+- Solution: RStudio enhances the R experience by offering a powerful, 
+cohesive toolset for data analysis, visualization, and programming in one 
+interface.  
+
+##### Concept 2: Panes 
+
+- **Console**: The Console in R is the interactive interface allowing users to execute R commands and view their results immediately.
+
+- **Files (Types)**:
+- **R File**: An R file (`.R`) contains scripts written in R language, used for data analysis and visualization.
+- **Quarto File**: A Quarto file (`.qmd`) is used for creating dynamic documents that can combine code execution with narrative text, images, and other content.
+
+- **Environment**: The Environment in R refers to the workspace that holds user-defined variables, data sets, and functions during an R session.
+
+
+
+##### Concept 3: R Packages and Libraries
+
+- **What is an R package and library?**  
+An R package is a collection of functions, data, and compiled code in a well-defined format, while the library is a directory where the packages are stored and managed.
+
+- **How to install and load R packages?**  
+To install R packages, use the `install.packages("packageName")` command, and to load them into an R session, use `library(packageName)`.
+
+- **Some commonly used R packages**  
+Commonly used R packages include `ggplot2` for data visualization, `dplyr` for data manipulation, `tidyr` for data tidying, and `shiny` for interactive web applications.
+
+
+
+
+#### ----------------------------------
+
+
+
+
+#### **Part 2 (P2)** Data Types - Vectors and Data frames
+
+**How does this tie to the journey?**
+Version 1:
+Vectors and data frames are pivotal in navigating the data science landscape, serving as the bedrock for data manipulation and analysis within R. Vectors allow for the storage of homogenous data elements in an ordered sequence, enabling straightforward operations such as arithmetic calculations on numeric data, text manipulation on character strings, and logical operations for data filtering. Data frames expand on this by offering a two-dimensional, table-like structure where each column can hold data of varying types, mirroring the diversity found in real-world data. This facilitates complex data handling tasks like subsetting, merging, and aggregation, critical for preprocessing, exploratory analysis, and preparing datasets for modeling or visualization. Together, vectors and data frames empower data scientists to efficiently process, explore, and derive insights from data, forming the foundation upon which data-driven decisions are made and insights are uncovered.
+
+Version 2:
+
+"Imagine you're playing a video game where you need to organize your inventory. Vectors in R are like your backpack slots, where you put similar items together in a row, making it easy to count or swap them. Now, data frames are like having a bigger chest; you can store different kinds of items, like armor in one drawer and potions in another, but they're all in one place. This helps you manage your stuff better, especially when you have a lot of it, like the data scientists who collect tons of info. They use vectors and data frames to keep their data neat and figure out cool things from it, just like how you'd strategize in a game to win!" 🎮📊
+
+
+#### Concept 1: Variable Type
+
+- **What is a quantitative variable?**
+Quantitative variables represent measurable quantities as numbers, like height or weight.
+```{r}
+quant_var <- c(5.5, 6.0, 5.8) # Heights in feet
+```
+
+- **What is a categorical (binary) variable?**
+Categorical (binary) variables represent categories with two possible values, such as "Yes" or "No".
+```{r}
+binary_var <- c(TRUE, FALSE, TRUE) # Binary or Boolean variables
+```
+
+#### Concept 2: Vectors
+
+- **What is a vector?**
+A vector is a basic data structure in R that contains elements of the same type.
+```{r}
+vec <- c(1, 2, 3) # Numeric vector
+```
+
+- **What is a numeric vector?**
+A numeric vector is a vector that contains numeric values.
+```{r}
+num_vec <- c(1.1, 2.2, 3.3)
+```
+
+- **What is a Boolean vector?**
+A Boolean vector is a vector that contains TRUE or FALSE values.
+```{r}
+bool_vec <- c(TRUE, FALSE, TRUE)
+```
+
+- **What is a character vector?**
+A character vector is a vector that contains text strings.
+```{r}
+char_vec <- c("apple", "banana", "cherry")
+```
+
+- **How to access elements within a vector?**
+You can access elements within a vector by using square brackets `[]` with the index of the element(s) you want to access.
+```{r}
+vec[2] # Access the second element of vec
+```
+
+#### Concept 3: Data Frames
+
+- **What is a data frame?**
+A data frame is a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column.
+```{r}
+df <- data.frame(Number = 1:3, Letter = c("A", "B", "C"))
+```
+
+- **What are rows?**
+Rows in a data frame represent observations or records.
+```{r}
+df[1, ] # Access the first row
+```
+
+- **What are columns?**
+Columns in a data frame represent variables.
+```{r}
+df[, "Number"] # Access the "Number" column
+```
+
+- **How to access rows and columns within a data frame?**
+You can access rows and columns within a data frame using square brackets `[,]` with row indices before the comma and column indices or names after the comma.
+```{r}
+df[1, "Number"] # Access the first row and "Number" column
+```
+
+#### Concept 4: Lists
+
+- **What is a list?**
+A list in R is an ordered collection of objects, which can be of different types and structures.
+```{r}
+lst <- list(number = 42, name = "R", data = df)
+```
+
+- **How to access items within a list**
+You can access items within a list using double square brackets `[[]]` for index or single square brackets `[]` with the item name.
+```{r}
+lst[["name"]] # Access the "name" item
+lst$name # Another way to access the "name" item
+lst[[1]]
+```
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+### **Module 2 (M2)**
+
+#### **Part 1 (P1)** Extraction and Transformation (ET) - Box Office Analysis
+
+---------------------------------------
+**How does this tie to the journey?**
+Envision yourself as a data analyst at a bustling movie studio. You're tasked with identifying blockbuster trends that capture audience interests. You'll harness the power of data to uncover hidden patterns and drive successful film projects. For example investigating age and genres of movies.
+---------------------------------------
+
+##### Concept 1: Extract - Read in CSV
+
+(GO TO EXCEL)
+
+To start analyzing Excel data in R, we first need to read the data into R using the `readxl` package's `read_xlsx()` function.
+
+```{r}
+library(readr)
+movies_df <- read_csv("IMDB_Genres.csv")
+```
+
+##### Concept 2a: Transform - Select Variables
+
+The `%>%` symbol in R is called the pipe operator, and it's used to pass the output of one function directly into the next, making your code cleaner and easier to read. It's like saying "then do this" between steps in your data analysis process.
+
+The `select` function in R, part of the `dplyr` package, is used to choose specific columns from a dataset by their names or positions, which can also include renaming or dropping columns. It's like picking your favorite songs to create a custom playlist from your entire music library.
+
+```{r}
+library(dplyr)
+title_year_genre_df <- movies_df %>%
+  select(Title, Year, Genre)
+```
+
+
+##### Concept 2b: Transform - Mutate Variables
+
+The mutate function in R is used to add new variables to a dataset or change existing ones. It’s like updating your playlist by adding new songs or changing the order of the tracks.
+
+```{r}
+age_df <- title_year_genre_df %>%
+  mutate(Age = 2023 - Year)
+```
+
+
+
+##### Concept 3: Visualize - Histogram
+
+Think of a histogram like a bar chart that shows you how many times something happens. It's great for seeing how often certain numbers come up.
+
+```{r}
+library(ggplot2)
+
+age_df %>% 
+  ggplot(aes(x=Age)) + 
+  geom_histogram(binwidth = 10)
+```
+
+- **What type of variable can be used within Histogram?**
+- You can use a numeric variable, like the Age of movies.
+- **Change Bin Size**
+- The `binwidth` parameter lets you decide how wide each bar should be. Smaller `binwidth` means more bars!
+
+##### Concept 4: Visualize - Bar Plot
+Bar plots are like histograms, but they're used for categories, like movie genres.
+
+```{r}
+age_df %>% 
+  ggplot(aes(x=Genre)) + 
+  geom_bar()
+```
+
+- **What type of variable can be used within bar plot?**
+- Categorical variables, like 'Comedy' or 'Action', are perfect for bar plots. They show you how many movies are in each genre.
+
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+#### **Part 2 (P2)** Visualization (V) - Marketing Insights from Viewership Data
+---------------------------------------
+**How does this tie to the journey?**
+Now, imagine fine-tuning the studio's marketing strategy. Through data, you dissect viewer preferences, pinpointing exactly what pulls audiences into theaters. Your insights fuel targeted campaigns that resonate deeply and fill seats.
+
+---------------------------------------
+
+
+##### Concept 1: Transform - Filter Variables
+
+Lets Learn about filter function.  
+
+The `filter` function in R is used to subset a data frame, keeping only the rows that meet certain conditions. It's like a gatekeeper that only lets through the data that matches your specified rules.
+
+```{r}
+# Filter a quantitative variable (e.g., Rating greater than 8)
+highly_rated_movies <- movies_data %>% filter(Rating > 8)
+
+# Filter a categorical binary variable (e.g., Movies that are Drama)
+drama_movies <- movies_data %>% filter(is_drama == "Drama")
+
+# Filter a categorical variable (e.g., Movies of the 'Action' genre)
+action_movies <- movies_data %>% filter(Genre == "Action")
+```
+
+##### Concept 2: Transform - Mutate Variables
+
+Let's talk about mutate again.
+```{r}
+# Change the levels name (e.g., Rename 'Not Drama' to 'Other')
+movies_df <- movies_df %>% mutate(is_drama = recode(is_drama, 'Not Drama' = 'Other'))
+
+# Turn a quantitative variable into a Boolean variable (e.g., High Revenue)
+movies_df <- movies_df %>% mutate(high_revenue = Revenue > mean(Revenue, na.rm = TRUE))
+```
+
+##### Concept 3: Visualize - Boxplot
+- **What type of variable can be used within box plot?**
+- Numeric variables, such as 'Rating' or 'Runtime', are used in box plots to show the distribution of data.
+
+```{r}
+
+movies_df %>% 
+  ggplot(aes(y=Rating)) + 
+  geom_boxplot()
+```
+
+This code will produce a boxplot showing the spread of movie ratings in your dataset.
+
+##### Concept 4: Visualize - Boxplot across multiple groups
+- **What type of variable can be used within box plot with multiple groups?**
+- A categorical variable, like 'Genre', can be used to compare the numeric distribution across different groups.
+
+
+To compare the distribution of a numeric variable across different categories, like 'is_thriller', you can use this R code:
+
+```{r}
+movies_df %>% 
+  ggplot(aes(x=is_thriller, y=Rating)) + 
+  geom_boxplot()
+```
+
+This will create a boxplot for each is_thriller, allowing you to compare the ratings across thriller and non thriller movies.
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+#### ----------------------------------
+
+
+
+### **Module 3 (M3)**
+
+#### **Part 1 (P1)** ET - Community Insights for Public Policy
+
+---------------------------------------
+**How does this tie to the journey?**
+Picture yourself collaborating with state officials, wielding data to inform policy decisions. Your analysis of community demographics and needs illuminates the path to impactful legislation and improved civic life.
+---------------------------------------
+##### Concept 1: Extract - htmltab
+
+
+
+Extracting data is our first step. We'll use a function similar to `htmltab` to pull the list of counties directly from the Wikipedia page.
+
+The `which` argument lets us specify which table on the page we're interested in, as pages often contain multiple tables.
+
+```{r}
+library(htmltab)
+url <- "https://en.wikipedia.org/wiki/List_of_counties_in_California"
+california_counties_df <- htmltab(url, which = 2)
+
+
+california_counties_df <- california_counties_df %>% 
+  rename(Population = `Population(2022)`,
+         Established = Est.)
+
+```
+
+
+##### Concept 2a: Transform - str_remove_all & as.numeric
+
+First, we remove commas from the population figures, making them easier to work with as numeric values. 
+
+Then, we convert the cleaned population data from strings to actual numeric values.
+
+```{r}
+clean_california_counties_df <- california_counties_df %>%
+  mutate(Population = str_remove_all(Population,",")) %>% 
+  mutate(Population = as.numeric(Population))
+
+```
+
+##### Concept 2b: Transform - Adding & Select a variables
+
+```{r}
+
+clean_california_counties_df <- clean_california_counties_df %>%
+  mutate(State = "CA") %>% 
+  mutate(Established = as.numeric(Established)) %>% 
+  mutate(Est_before_1950 = ifelse(Established<1950,"Yes","No"))
+
+clean_california_counties_df <- clean_california_counties_df %>% 
+  select(State, Population, County, Est_before_1950)
+
+```
+
+
+
+##### Concept 3: Visualize - geom violin plot
+A violin plot is a method of plotting numeric data and can be thought of as a combination of a box plot and a kernel density plot. It provides a deeper understanding of the distribution of the data.
+
+```{r}
+clean_california_counties_df %>% 
+  ggplot(aes(x=Est_before_1950, y=Population)) + 
+  geom_violin(trim=FALSE)
+```
+
+This code will create a violin plot for the population of counties in California, giving a visual representation of the distribution of population sizes.
+
+##### Concept 4: Visualize - labels & theme_custom
+
+Adding labels and themes can make your plots more informative and aesthetically pleasing. The `theme_bw()` function gives a clean, white background to your plots.
+
+```{r}
+clean_california_counties_df %>% 
+  ggplot(aes(x=Est_before_1950, y=Population)) + 
+  geom_violin(trim=FALSE)
+  labs(title="Population Distribution in California Counties \n 
+       Based on when they were established",
+       x="Established Before 1950",
+       y="Population") +
+  theme_custom()
+```
+
+This code will produce a violin plot with a title and axis labels, set against a clean, white background theme. It's a great way to present your data in a clear and professional manner.
+
+
+#### ----------------------------------
+
+
+
+
+
+#### **Part 2 (P2)** TV - Enhancing State Services with Data
+---------------------------------------
+
+**How does this tie to the journey?**
+As you dive into the world of social media analytics, your focus shifts to understanding the digital landscape. By examining the data from the most-followed TikTok accounts, you develop insights into online engagement trends. This knowledge helps you devise innovative approaches to digital marketing, ultimately enhancing the online presence and influence of your state's initiatives.
+---------------------------------------
+
+```{r}
+library(htmltab)
+url <- "https://en.wikipedia.org/wiki/List_of_most-followed_TikTok_accounts"
+tiktok_df <- htmltab(url, which = 2)
+
+```
+
+
+
+##### Concept 1: Extract the data
+
+
+```{r}
+library(htmltab)
+url <- "https://en.wikipedia.org/wiki/List_of_most-followed_TikTok_accounts"
+tiktok_df <- htmltab(url, which = 1)
+
+```
+
+##### Concept 2: Transform - mutate Followers and Likes into numeric
+
+```{r}
+tiktok_df <- tiktok_df %>%
+  mutate(Followers_Millions = as.numeric(`Followers(millions)`)) %>%
+  mutate(Likes_Billions = as.numeric(`Likes(billions)`))
+```
+
+
+
+##### Concept 3: Transform - str_detect: based on description detect if person is social media personality or not  
+```{r}
+tiktok_df <- tiktok_df %>%
+  mutate(Is_Social_Media_Personality = ifelse(str_detect(Description, "Social media personality"), TRUE, FALSE))
+```
+
+
+
+
+
+##### Concept 4: Visualize - geom point: follower vs likes
+
+```{r}
+##### Concept 5: Visualize - geom point: follower vs likes
+ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
+  geom_point() + 
+  theme_custom()
+```
+
+
+
+
+##### Concept 5: Visualize - color by social media personality or not   and labels 
+```{r}
+tiktok_df %>% 
+ggplot(aes(x=Followers_Millions, y=Likes_Billions, color=Is_Social_Media_Personality)) +
+  geom_point() +
+  labs(title="Followers vs Likes on TikTok",
+       x="Number of Followers",
+       y="Number of Likes",
+       color="Is Social Media Personality") +
+  theme_custom()
+```
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+#### ----------------------------------
+
+
+
+### **Module 4 (M4)**
+
+#### **Part 1 (P1)** ET - Gaming Market Dynamics
+---------------------------------------
+**How does this tie to the journey?**
+Step into the virtual realm of a game developer. With data as your guide, explore the ebb and flow of gaming trends. Use this insight to innovate, crafting the next gaming sensation that captivates a global audience.
+---------------------------------------
+##### Concept 1: Extract: htmltabs, multiple tables https://en.wikipedia.org/wiki/2023_in_video_games
+##### Concept 2: Transform: group by & summarise
+##### Concept 3: Visualize: geom bar dodged
+##### Concept 4: Visualize: text
+
+#### ----------------------------------
+
+#### **Part 2 (P2)** TV - Viral Content Creation
+---------------------------------------
+**How does this tie to the journey?**
+Transition to a social media strategist at the forefront of digital entertainment. By understanding viral trends through data, you craft content that not only entertains but becomes a cultural touchstone, propelling your brand to new heights.
+---------------------------------------
+##### Concept 1: Extract: htmltabs
+##### Concept 2: Transform: select, mutate
+##### Concept 3: Transform: select, filter
+##### Concept 4: Transform: select, filter, mutate
+##### Concept 5: Visualize
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+
+
+
+
+
+
+## Weekend 2 Outline
+
+### **Module 5 (M5) - Spotify I**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+1. **Artist Album Release Patterns**: How has the number of albums released by each artist changed over the years?
+- *Manipulation*: Group the data by artist and album release year, then count the number of albums.
+- *Visualization*: Create a line graph showing the number of albums released per year for each artist.
+
+```{r}
+all_artists_df %>% 
+  # distinct(artist, album, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
+  group_by(artist_name, album_release_year) %>%  # Group by artist and album year
+  summarise(count = n()) %>%  # Count the number of albums
+  ggplot(aes(x = album_release_year, y = count, group = artist_name, color = artist_name)) +  # Plot album_year on x-axis and count on y-axis, group and color by artist
+  geom_line() +  # Use line graph
+  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Albums") +  # Add labels
+  theme_custom()
+```
+
+
+(Extend this for Part 2)
+
+
+
+#### **Part 1 (P1)** ET - Spotify I
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+#### ----------------------------------
+
+#### **Part 2 (P2)** TV - Spotify I
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+### **Module 6 (M6) - Sports I**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+
+
+#### **Module 6 (M6)**: Analyzing Player Age Distribution in the NBA
+
+*Purpose:* We aim to understand the age distribution of NBA players in 2023 and identify which age group dominates. Additionally, we'll explore how this distribution varies across different player positions.
+
+
+1a. **Age Distribution of Players**: How does the age distribution look across all players, and which age group is most prevalent?
+- *Manipulation*: Group the players by age and count the number of players in each age group.
+- *Visualization*: Create a histogram to display the age distribution.
+
+#### **Part 1 (P1)**: Understanding Age Distribution
+
+**How does this tie to the journey?**  
+Discovering the age landscape across NBA players provides insights into career longevity and the prime playing years, essential for team management and talent scouting.
+
+##### Concept 1: Removing Duplicates
+code:
+```{r}
+distinct(player_name, .keep_all = TRUE)
+```
+
+Purpose: Ensure each player is counted once, focusing on those with the most games played for accurate age analysis.
+
+##### Concept 2: Grouping by Age
+Code:
+```{r}
+mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE))
+```
+
+Purpose: Segment players into age groups for a structured analysis of age distribution.
+
+##### Concept 3: Counting Players per Age Group
+
+Code:
+```{r}
+group_by(age_group) %>% summarise(freq = n())
+```
+Purpose: Determine the number of players in each age group to identify the most prevalent age bracket.
+
+##### Concept 4: Visualizing Age Distribution
+
+code:
+```{r}
+ggplot(aes(x = age_group, y = freq)) + geom_bar(stat = "identity", fill = "steelblue")
+```
+Purpose: Create a histogram to visually represent the age distribution among NBA players in 2023.
+
+
+
+##### Concept 5: Everything Put together
+
+```{r}
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(age_group) %>%  # Group by age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq)) +  # Plot age_group on x-axis and frequency on y-axis
+  geom_bar(stat = "identity", fill = "steelblue") +  # Use bar chart
+  labs(title = "Age Distribution of NBA Players in 2023", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_custom()
+```
+
+
+
+#### ----------------------------------
+
+#### **Part 2 (P2)**: Age Distribution by Position
+
+
+**How does this tie to the journey?**  
+Examining age distribution by player position uncovers patterns of career duration and potential position-specific physical demands, guiding strategic decisions in team composition and player development.
+
+##### Concept 1: Simplifying Position Data
+
+Code:
+```{r}
+mutate(position = str_split(position, "-", simplify = TRUE)[,1])
+```
+Purpose: Clarify player positions to ensure a clean, consistent dataset for analysis by focusing on primary positions.
+
+##### Concept 2: Grouping by Position and Age
+
+Code:
+```{r}
+group_by(position, age_group)
+```
+Purpose: Examine the age distribution within each player position, providing a nuanced view of age trends across different roles.
+
+##### Concept 3: Visualizing Age Distribution by Position
+
+Code:
+```{r}
+ggplot(aes(x = age_group, y = freq, fill = position)) + geom_bar(stat = "identity", position = "dodge")
+```
+Purpose: Use a dodged bar chart to compare age distribution across positions, highlighting differences in career trajectories and longevity among roles.
+
+
+
+
+
+
+
+##### Concept 4: Everything Put together  
+
+```{r}
+## 1b. **Age and Position Distribution of Players**: How does the age distribution look across all players conditioned on position?
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(position = str_split(position, "-", simplify = TRUE)[,1]) %>% 
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(position, age_group) %>%  # Group by position and age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq, fill = position)) +  # Plot age_group on x-axis and frequency on y-axis, fill by position
+  geom_bar(stat = "identity", position = "dodge") +  # Use bar chart with bars side-by-side
+  labs(title = "Age Distribution of NBA Players in 2023 by Position", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_custom()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+
+### **Module 7 (M7) - Spotify II**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+
+
+**Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
+- *Manipulation*: Select the appropriate variables and filter based on the selected artists, Billie Ellish and Dua Lipa? 
+- *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
+
+
+-------------------------
+
+#### Part 1 (P1): Danceability and Energy Relationship
+
+*Purpose: Explore the relationship between danceability and energy in tracks by Billie Eilish and Dua Lipa.*
+
+##### Concept 1: Data Selection and Filtering  
+Code: `dua_lipa_billie_eilish_energy_danceability_df <- all_artists_df %>% select(artist_name, energy, danceability) %>% filter(artist_name %in% c("Dua Lipa","Billie Eilish"))`  
+
+Purpose: This line selects the necessary variables (`artist_name`, `energy`, `danceability`) from a dataset and filters it to include only songs by Billie Eilish and Dua Lipa.
+
+
+-------------------------
+
+##### Concept 2: Scatter Plot Visualization 
+Code: Part of the ggplot code - `ggplot(aes(x = energy, y = danceability, color = artist_name)) + geom_point()`  
+
+
+Purpose: Creates a scatter plot mapping `energy` to the x-axis and `danceability` to the y-axis, with points colored by artist, to visualize the relationship between these two variables.
+
+-------------------------
+
+##### Concept 3: Adding Reference Lines  
+
+
+Code: Part of the ggplot code - `geom_vline(xintercept = 0.5) + geom_hline(yintercept = 0.5)`  
+
+
+Purpose: Adds vertical and horizontal lines at the intercepts of 0.5 to the scatter plot as reference points, helping to visually center the analysis around average values.
+
+-------------------------
+
+
+##### Concept 4: Axis Limits 
+
+Code: Part of the ggplot code - `xlim(0,1) + ylim(0,1)`  
+
+Purpose: Restricts the plot's x and y axes to the range [0,1], ensuring that the visualization focuses on the valid range of values for `energy` and `danceability`.
+
+
+-------------------------
+
+
+##### Concept 5: Custom Theme Application 
+
+Code: Part of the ggplot code - `theme_custom()`  
+
+
+Purpose: Applies a custom theme to the plot, enhancing readability and aesthetic appeal according to predefined styling rules. (Note: `theme_custom()` is assumed to be a predefined ggplot theme function created by the user.)
+
+
+##### Concept 6: Everything Put together
+```{r}
+dua_lipa_billie_eilish_energy_danceability_1_df <- all_artists_df %>% 
+  select(artist_name, energy,danceability) %>% 
+  filter(artist_name %in% c("Dua Lipa","Billie Eilish")) 
+```
+
+
+```{r}
+dua_lipa_billie_eilish_energy_danceability_1_df %>% 
+  ggplot(aes(x = energy, y = danceability, color = artist_name)) +
+  geom_point() +
+  geom_vline(xintercept = 0.5) +
+  geom_hline(yintercept = 0.5) +
+  xlim(0,1) +
+  ylim(0,1)+
+  theme_custom()
+```
+
+#### ----------------------------------
+
+
+#### Part 2 (P2): Combining Artist Data
+
+*Purpose: Investigate how data integration affects analysis by combining song data from Dua Lipa and Billie Eilish.*
+
+##### Concept 1: Data Binding 
+Code: `dua_lipa_billie_eilish_energy_danceability_df <- dua_lipa_df %>% bind_rows(billie_eilish_df) %>% select(artist_name, energy, danceability)`  
+Purpose: Combines (binds) rows from separate data frames for Dua Lipa and Billie Eilish into a single data frame and selects relevant variables, showcasing how to merge datasets for integrated analysis.
+
+This structure provides a clear educational pathway from understanding the individual components of data manipulation and visualization to seeing the effects of combining data sets on analysis outcomes.
+
+##### Concept 2: Everything Put together
+
+```{r}
+dua_lipa_billie_eilish_energy_danceability_2_df <- dua_lipa_df %>% 
+  bind_rows(billie_eilish_df) %>% 
+  select(artist_name, energy,danceability) 
+```
+
+
+```{r}
+dua_lipa_billie_eilish_energy_danceability_2_df %>% 
+  ggplot(aes(x = energy, y = danceability, color = artist_name)) +
+  geom_point() +
+  geom_vline(xintercept = 0.5) +
+  geom_hline(yintercept = 0.5) +
+  xlim(0,1) +
+  ylim(0,1)+
+  theme_custom()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+### **Module 8 (M8) - Sports II**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+
+
+3. **Touchdown to Interception Ratio**: Which quarterbacks have a touchdown to interception ratio greater than 2?
+- *Manipulation*: Calculate the touchdown to interception ratio for each quarterback and filter those with a ratio greater than 2.
+- *Visualization*: Create a scatter plot with touchdowns on the x-axis and interceptions on the y-axis, highlighting quarterbacks who meet the criteria.
+
+
+```{r}
+passing_stats_df %>% 
+  distinct(.,.keep_all = TRUE) %>% 
+  filter(year == 2023) %>% 
+  select(player,int,td)  %>% 
+  mutate(td_per_int = ifelse(int == 0, NA, td/int)) %>% 
+  filter(td_per_int <=4 & td_per_int >=1) %>% 
+  arrange(td_per_int) %>% 
+  mutate(player = factor(player, levels = unique(player))) %>% 
+  ggplot(aes(x=player, y = td_per_int)) +
+  geom_point() + 
+  geom_text(aes(label=round(td_per_int, 2)), hjust=-0.1, vjust=-0.5) +
+  labs(x = "Player", y = "TD/INT Ratio", title = "TD/INT Ratio for Each Player in 2023") +
+  coord_flip() +
+  theme_custom()
+```
+
+
+
+
+#### **Part 1 (P1)** ET - Sports II
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+
+#### ----------------------------------
+
+#### **Part 2 (P2)** TV - Sports II
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+
+
+
+
+\newpage
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Weekend 3 Outline
+- Hackathon
+
+
+
+
