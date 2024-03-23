@@ -1,0 +1,156 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+
+
+
+
+### **Module 6 (M6) - Sports I**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+
+
+#### **Module 6 (M6)**: Analyzing Player Age Distribution in the NBA
+
+*Purpose:* We aim to understand the age distribution of NBA players in 2023 and identify which age group dominates. Additionally, we'll explore how this distribution varies across different player positions.
+
+
+1a. **Age Distribution of Players**: How does the age distribution look across all players, and which age group is most prevalent?
+- *Manipulation*: Group the players by age and count the number of players in each age group.
+- *Visualization*: Create a histogram to display the age distribution.
+
+#### **Part 1 (P1)**: Understanding Age Distribution
+
+**How does this tie to the journey?**  
+Discovering the age landscape across NBA players provides insights into career longevity and the prime playing years, essential for team management and talent scouting.
+
+##### Concept 1: Removing Duplicates
+code:
+```{r}
+distinct(player_name, .keep_all = TRUE)
+```
+
+Purpose: Ensure each player is counted once, focusing on those with the most games played for accurate age analysis.
+
+##### Concept 2: Grouping by Age
+Code:
+```{r}
+mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE))
+```
+
+Purpose: Segment players into age groups for a structured analysis of age distribution.
+
+##### Concept 3: Counting Players per Age Group
+
+Code:
+```{r}
+group_by(age_group) %>% summarise(freq = n())
+```
+Purpose: Determine the number of players in each age group to identify the most prevalent age bracket.
+
+##### Concept 4: Visualizing Age Distribution
+
+code:
+```{r}
+ggplot(aes(x = age_group, y = freq)) + geom_bar(stat = "identity", fill = "steelblue")
+```
+Purpose: Create a histogram to visually represent the age distribution among NBA players in 2023.
+
+
+
+##### Concept 5: Everything Put together
+
+```{r}
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(age_group) %>%  # Group by age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq)) +  # Plot age_group on x-axis and frequency on y-axis
+  geom_bar(stat = "identity", fill = "steelblue") +  # Use bar chart
+  labs(title = "Age Distribution of NBA Players in 2023", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_custom()
+```
+
+
+
+#### ----------------------------------
+
+#### **Part 2 (P2)**: Age Distribution by Position
+
+
+**How does this tie to the journey?**  
+Examining age distribution by player position uncovers patterns of career duration and potential position-specific physical demands, guiding strategic decisions in team composition and player development.
+
+##### Concept 1: Simplifying Position Data
+
+Code:
+```{r}
+mutate(position = str_split(position, "-", simplify = TRUE)[,1])
+```
+Purpose: Clarify player positions to ensure a clean, consistent dataset for analysis by focusing on primary positions.
+
+##### Concept 2: Grouping by Position and Age
+
+Code:
+```{r}
+group_by(position, age_group)
+```
+Purpose: Examine the age distribution within each player position, providing a nuanced view of age trends across different roles.
+
+##### Concept 3: Visualizing Age Distribution by Position
+
+Code:
+```{r}
+ggplot(aes(x = age_group, y = freq, fill = position)) + geom_bar(stat = "identity", position = "dodge")
+```
+Purpose: Use a dodged bar chart to compare age distribution across positions, highlighting differences in career trajectories and longevity among roles.
+
+
+
+
+
+
+
+##### Concept 4: Everything Put together  
+
+```{r}
+## 1b. **Age and Position Distribution of Players**: How does the age distribution look across all players conditioned on position?
+nba_year_2023_df %>% 
+  distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
+  mutate(position = str_split(position, "-", simplify = TRUE)[,1]) %>% 
+  mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
+  group_by(position, age_group) %>%  # Group by position and age group
+  summarise(freq = n()) %>%  # Count the frequency in each group
+  ggplot(aes(x = age_group, y = freq, fill = position)) +  # Plot age_group on x-axis and frequency on y-axis, fill by position
+  geom_bar(stat = "identity", position = "dodge") +  # Use bar chart with bars side-by-side
+  labs(title = "Age Distribution of NBA Players in 2023 by Position", x = "Age Group", y = "Number of Players") +  # Add labels
+  theme_custom()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+### **Module 0 (M0)**
+- Introduction and Overview
+
+
+#### Overview of the Hackathon Process
+
+The Data Science Hackathon is designed to engage high school students in the practical aspects of data science through a focused competition. Over the course of two weekends, participants will undergo a learning phase through instructional videos and can get help from mentors, followed by a weekend dedicated to applying their new skills in a hackathon format. This process aims to not only introduce students to the field of data science but also to challenge them to solve real-world problems using data from interesting domains like Spotify and sports.
+
+#### Core Objectives of the Hackathon
+
+1. **Igniting a Passion for Data Science: ** Launch high school students on an exhilarating journey into the world of programming and data science, setting the stage for future innovations and discoveries.
+
+2. **Hands-On Experience with Authentic Data: ** Dive deep into the vast ocean of real-world data, where students will learn to navigate, analyze, and extract valuable insights from genuine datasets from intriguing domains like Spotify and sports.
+
+3. **Collaboration and Mentorship: ** Foster a dynamic environment where students engage in an interactive project alongside mentors from Cal Poly. This collaboration is designed to bridge theoretical knowledge with practical application, encouraging students to solve complex problems through teamwork and expert guidance.
+
+#### Foundational Skills in Programming and Data Science
+
+Participants will gain essential skills in:
+- Basic programming concepts and syntax, likely using R.
+- Data manipulation and analysis using packages like dplyr and stringr (for R).
+- Data visualization techniques using ggplot2 (for R).
+- Understanding of how to approach data science problems from hypothesis to insight.
+
+#### Introduction to Posit Cloud and Its Role in the Hackathon
+
+Posit Cloud serves as the primary platform for the hackathon, providing an accessible, web-based environment for coding. It offers:
+- An integrated development environment (IDE) for R and Python, removing the need for local software installation.
+- Easy access to project workspaces, facilitating seamless collaboration among participants.
+- A platform for mentors to share code snippets, instructional materials, and feedback in real-time.
+
+#### How to Use Posit
+
+Participants will learn to:
+- Navigate the Posit Cloud interface to create and manage projects.
+- Utilize the IDE for writing and executing code.
+- Share projects with mentors for review and collaboration.
+- Deploy applications or visualizations directly from Posit Cloud.
+
+#### Mentorship and Support Available
+
+Mentorship plays a crucial role in the hackathon, with support provided by:
+- College students and professionals in data science, offering guidance through office hours and discussion forums.
+- Structured feedback sessions, where participants can present their progress and receive constructive advice.
+- Access to a repository of resources, including tutorials, datasets, and examples specifically curated for the hackathon challenges.
+
+#### Quiz Engagement
+
+- Complementing each video, you'll find a quiz designed to sharpen your newly acquired skills.
+- Enjoy the freedom of unlimited attempts to ensure mastery of the material.
+- Don't hesitate to reach out to your mentors for assistance and insights.
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+
+
+
+
+### **Module 4 (M4)**
+
+#### **Part 1 (P1)** ET - Gaming Market Dynamics
+---------------------------------------
+**How does this tie to the journey?**
+Step into the virtual realm of a game developer. With data as your guide, explore the ebb and flow of gaming trends. Use this insight to innovate, crafting the next gaming sensation that captivates a global audience.
+---------------------------------------
+##### Concept 1: Extract: htmltabs, multiple tables https://en.wikipedia.org/wiki/2023_in_video_games
+##### Concept 2: Transform: group by & summarise
+##### Concept 3: Visualize: geom bar dodged
+##### Concept 4: Visualize: text
+
+#### ----------------------------------
+
+#### **Part 2 (P2)** TV - Viral Content Creation
+---------------------------------------
+**How does this tie to the journey?**
+Transition to a social media strategist at the forefront of digital entertainment. By understanding viral trends through data, you craft content that not only entertains but becomes a cultural touchstone, propelling your brand to new heights.
+---------------------------------------
+##### Concept 1: Extract: htmltabs
+##### Concept 2: Transform: select, mutate
+##### Concept 3: Transform: select, filter
+##### Concept 4: Transform: select, filter, mutate
+##### Concept 5: Visualize
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Weekend 2 Outline
+

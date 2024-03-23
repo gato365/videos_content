@@ -1,0 +1,175 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+
+
+
+### **Module 1 (M1)**
+
+**How does this tie to the journey?**
+Version 1:
+These topics tie into the data science learning journey by providing the foundational tools and frameworks necessary for data manipulation, analysis, and visualization. Understanding how to install and utilize R packages enables learners to efficiently process and analyze large datasets, apply statistical models, and generate insightful visualizations, which are critical skills in the field of data science.
+
+Version 2:
+
+"Hey there! So, these topics we're talking about are super important if you're interested in data science—that's like being a detective, but for numbers and patterns. Learning how to use R, which is a special tool for data science, is like learning how to use a new app on your phone. It helps you sort through tons of information, find cool trends, and make those awesome graphs and charts you see in science fairs. It's all about making sense of the data and telling a story with it. Pretty neat, right?" 😄📊
+
+
+
+#### **Part 1 (P1)** Basics of what is R
+
+##### Concept 1: R and R Studio
+
+- What is R?
+- Solution: R is a programming language and environment designed for     
+statistical computing and graphics.
+
+- What is R Studio?
+- Solution: RStudio is an integrated development environment (IDE) that 
+provides a user-friendly interface for working with R.  
+
+- Why R Studio?
+- Solution: RStudio enhances the R experience by offering a powerful, 
+cohesive toolset for data analysis, visualization, and programming in one 
+interface.  
+
+##### Concept 2: Panes 
+
+- **Console**: The Console in R is the interactive interface allowing users to execute R commands and view their results immediately.
+
+- **Files (Types)**:
+- **R File**: An R file (`.R`) contains scripts written in R language, used for data analysis and visualization.
+- **Quarto File**: A Quarto file (`.qmd`) is used for creating dynamic documents that can combine code execution with narrative text, images, and other content.
+
+- **Environment**: The Environment in R refers to the workspace that holds user-defined variables, data sets, and functions during an R session.
+
+
+
+##### Concept 3: R Packages and Libraries
+
+- **What is an R package and library?**  
+An R package is a collection of functions, data, and compiled code in a well-defined format, while the library is a directory where the packages are stored and managed.
+
+- **How to install and load R packages?**  
+To install R packages, use the `install.packages("packageName")` command, and to load them into an R session, use `library(packageName)`.
+
+- **Some commonly used R packages**  
+Commonly used R packages include `ggplot2` for data visualization, `dplyr` for data manipulation, `tidyr` for data tidying, and `shiny` for interactive web applications.
+
+
+
+
+#### ----------------------------------
+
+
+
+
+#### **Part 2 (P2)** Data Types - Vectors and Data frames
+
+**How does this tie to the journey?**
+Version 1:
+Vectors and data frames are pivotal in navigating the data science landscape, serving as the bedrock for data manipulation and analysis within R. Vectors allow for the storage of homogenous data elements in an ordered sequence, enabling straightforward operations such as arithmetic calculations on numeric data, text manipulation on character strings, and logical operations for data filtering. Data frames expand on this by offering a two-dimensional, table-like structure where each column can hold data of varying types, mirroring the diversity found in real-world data. This facilitates complex data handling tasks like subsetting, merging, and aggregation, critical for preprocessing, exploratory analysis, and preparing datasets for modeling or visualization. Together, vectors and data frames empower data scientists to efficiently process, explore, and derive insights from data, forming the foundation upon which data-driven decisions are made and insights are uncovered.
+
+Version 2:
+
+"Imagine you're playing a video game where you need to organize your inventory. Vectors in R are like your backpack slots, where you put similar items together in a row, making it easy to count or swap them. Now, data frames are like having a bigger chest; you can store different kinds of items, like armor in one drawer and potions in another, but they're all in one place. This helps you manage your stuff better, especially when you have a lot of it, like the data scientists who collect tons of info. They use vectors and data frames to keep their data neat and figure out cool things from it, just like how you'd strategize in a game to win!" 🎮📊
+
+
+#### Concept 1: Variable Type
+
+- **What is a quantitative variable?**
+Quantitative variables represent measurable quantities as numbers, like height or weight.
+```{r}
+quant_var <- c(5.5, 6.0, 5.8) # Heights in feet
+```
+
+- **What is a categorical (binary) variable?**
+Categorical (binary) variables represent categories with two possible values, such as "Yes" or "No".
+```{r}
+binary_var <- c(TRUE, FALSE, TRUE) # Binary or Boolean variables
+```
+
+#### Concept 2: Vectors
+
+- **What is a vector?**
+A vector is a basic data structure in R that contains elements of the same type.
+```{r}
+vec <- c(1, 2, 3) # Numeric vector
+```
+
+- **What is a numeric vector?**
+A numeric vector is a vector that contains numeric values.
+```{r}
+num_vec <- c(1.1, 2.2, 3.3)
+```
+
+- **What is a Boolean vector?**
+A Boolean vector is a vector that contains TRUE or FALSE values.
+```{r}
+bool_vec <- c(TRUE, FALSE, TRUE)
+```
+
+- **What is a character vector?**
+A character vector is a vector that contains text strings.
+```{r}
+char_vec <- c("apple", "banana", "cherry")
+```
+
+- **How to access elements within a vector?**
+You can access elements within a vector by using square brackets `[]` with the index of the element(s) you want to access.
+```{r}
+vec[2] # Access the second element of vec
+```
+
+#### Concept 3: Data Frames
+
+- **What is a data frame?**
+A data frame is a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column.
+```{r}
+df <- data.frame(Number = 1:3, Letter = c("A", "B", "C"))
+```
+
+- **What are rows?**
+Rows in a data frame represent observations or records.
+```{r}
+df[1, ] # Access the first row
+```
+
+- **What are columns?**
+Columns in a data frame represent variables.
+```{r}
+df[, "Number"] # Access the "Number" column
+```
+
+- **How to access rows and columns within a data frame?**
+You can access rows and columns within a data frame using square brackets `[,]` with row indices before the comma and column indices or names after the comma.
+```{r}
+df[1, "Number"] # Access the first row and "Number" column
+```
+
+#### Concept 4: Lists
+
+- **What is a list?**
+A list in R is an ordered collection of objects, which can be of different types and structures.
+```{r}
+lst <- list(number = 42, name = "R", data = df)
+```
+
+- **How to access items within a list**
+You can access items within a list using double square brackets `[[]]` for index or single square brackets `[]` with the item name.
+```{r}
+lst[["name"]] # Access the "name" item
+lst$name # Another way to access the "name" item
+lst[[1]]
+```
+
+
+
+
+
+
+
+

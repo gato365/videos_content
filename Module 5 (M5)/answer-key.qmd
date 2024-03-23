@@ -1,0 +1,56 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+
+
+
+### **Module 5 (M5) - Spotify I**
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+1. **Artist Album Release Patterns**: How has the number of albums released by each artist changed over the years?
+- *Manipulation*: Group the data by artist and album release year, then count the number of albums.
+- *Visualization*: Create a line graph showing the number of albums released per year for each artist.
+
+```{r}
+all_artists_df %>% 
+  # distinct(artist, album, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
+  group_by(artist_name, album_release_year) %>%  # Group by artist and album year
+  summarise(count = n()) %>%  # Count the number of albums
+  ggplot(aes(x = album_release_year, y = count, group = artist_name, color = artist_name)) +  # Plot album_year on x-axis and count on y-axis, group and color by artist
+  geom_line() +  # Use line graph
+  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Albums") +  # Add labels
+  theme_custom()
+```
+
+
+(Extend this for Part 2)
+
+
+
+#### **Part 1 (P1)** ET - Spotify I
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+#### ----------------------------------
+
+#### **Part 2 (P2)** TV - Spotify I
+**How does this tie to the journey?**
+##### Concept 1:
+##### Concept 2:
+##### Concept 3:
+##### Concept 4:
+##### Concept 5:
+
+
+
+
+
+
+

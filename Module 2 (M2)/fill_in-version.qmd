@@ -1,0 +1,159 @@
+---
+title: "Project Title Here"
+author: "Author Name Here"
+date: "Current Date Here"
+---
+
+
+
+
+### **Module 2 (M2)**
+
+#### **Part 1 (P1)** Extraction and Transformation (ET) - Box Office Analysis
+
+---------------------------------------
+**How does this tie to the journey?**
+Envision yourself as a data analyst at a bustling movie studio. You're tasked with identifying blockbuster trends that capture audience interests. You'll harness the power of data to uncover hidden patterns and drive successful film projects. For example investigating age and genres of movies.
+---------------------------------------
+
+##### Concept 1: Extract - Read in CSV
+
+(GO TO EXCEL)
+
+To start analyzing Excel data in R, we first need to read the data into R using the `readxl` package's `read_xlsx()` function.
+
+```{r}
+library(readr)
+movies_df <- read_csv("IMDB_Genres.csv")
+```
+
+##### Concept 2a: Transform - Select Variables
+
+The `%>%` symbol in R is called the pipe operator, and it's used to pass the output of one function directly into the next, making your code cleaner and easier to read. It's like saying "then do this" between steps in your data analysis process.
+
+The `select` function in R, part of the `dplyr` package, is used to choose specific columns from a dataset by their names or positions, which can also include renaming or dropping columns. It's like picking your favorite songs to create a custom playlist from your entire music library.
+
+```{r}
+library(dplyr)
+title_year_genre_df <- movies_df %>%
+  select(Title, Year, Genre)
+```
+
+
+##### Concept 2b: Transform - Mutate Variables
+
+The mutate function in R is used to add new variables to a dataset or change existing ones. It’s like updating your playlist by adding new songs or changing the order of the tracks.
+
+```{r}
+age_df <- title_year_genre_df %>%
+  mutate(Age = 2023 - Year)
+```
+
+
+
+##### Concept 3: Visualize - Histogram
+
+Think of a histogram like a bar chart that shows you how many times something happens. It's great for seeing how often certain numbers come up.
+
+```{r}
+library(ggplot2)
+
+age_df %>% 
+  ggplot(aes(x=Age)) + 
+  geom_histogram(binwidth = 10)
+```
+
+- **What type of variable can be used within Histogram?**
+- You can use a numeric variable, like the Age of movies.
+- **Change Bin Size**
+- The `binwidth` parameter lets you decide how wide each bar should be. Smaller `binwidth` means more bars!
+
+##### Concept 4: Visualize - Bar Plot
+Bar plots are like histograms, but they're used for categories, like movie genres.
+
+```{r}
+age_df %>% 
+  ggplot(aes(x=Genre)) + 
+  geom_bar()
+```
+
+- **What type of variable can be used within bar plot?**
+- Categorical variables, like 'Comedy' or 'Action', are perfect for bar plots. They show you how many movies are in each genre.
+
+
+
+
+
+
+
+
+#### ----------------------------------
+
+
+
+#### **Part 2 (P2)** Visualization (V) - Marketing Insights from Viewership Data
+---------------------------------------
+**How does this tie to the journey?**
+Now, imagine fine-tuning the studio's marketing strategy. Through data, you dissect viewer preferences, pinpointing exactly what pulls audiences into theaters. Your insights fuel targeted campaigns that resonate deeply and fill seats.
+
+---------------------------------------
+
+
+##### Concept 1: Transform - Filter Variables
+
+Lets Learn about filter function.  
+
+The `filter` function in R is used to subset a data frame, keeping only the rows that meet certain conditions. It's like a gatekeeper that only lets through the data that matches your specified rules.
+
+```{r}
+# Filter a quantitative variable (e.g., Rating greater than 8)
+highly_rated_movies <- movies_data %>% filter(Rating > 8)
+
+# Filter a categorical binary variable (e.g., Movies that are Drama)
+drama_movies <- movies_data %>% filter(is_drama == "Drama")
+
+# Filter a categorical variable (e.g., Movies of the 'Action' genre)
+action_movies <- movies_data %>% filter(Genre == "Action")
+```
+
+##### Concept 2: Transform - Mutate Variables
+
+Let's talk about mutate again.
+```{r}
+# Change the levels name (e.g., Rename 'Not Drama' to 'Other')
+movies_df <- movies_df %>% mutate(is_drama = recode(is_drama, 'Not Drama' = 'Other'))
+
+# Turn a quantitative variable into a Boolean variable (e.g., High Revenue)
+movies_df <- movies_df %>% mutate(high_revenue = Revenue > mean(Revenue, na.rm = TRUE))
+```
+
+##### Concept 3: Visualize - Boxplot
+- **What type of variable can be used within box plot?**
+- Numeric variables, such as 'Rating' or 'Runtime', are used in box plots to show the distribution of data.
+
+```{r}
+
+movies_df %>% 
+  ggplot(aes(y=Rating)) + 
+  geom_boxplot()
+```
+
+This code will produce a boxplot showing the spread of movie ratings in your dataset.
+
+##### Concept 4: Visualize - Boxplot across multiple groups
+- **What type of variable can be used within box plot with multiple groups?**
+- A categorical variable, like 'Genre', can be used to compare the numeric distribution across different groups.
+
+
+To compare the distribution of a numeric variable across different categories, like 'is_thriller', you can use this R code:
+
+```{r}
+movies_df %>% 
+  ggplot(aes(x=is_thriller, y=Rating)) + 
+  geom_boxplot()
+```
+
+This will create a boxplot for each is_thriller, allowing you to compare the ratings across thriller and non thriller movies.
+
+
+
