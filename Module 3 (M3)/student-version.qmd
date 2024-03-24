@@ -86,10 +86,10 @@ Adding labels and themes can make your plots more informative and aesthetically 
 clean_california_counties_df %>% 
   ggplot(aes(x=Est_before_1950, y=Population)) + 
   geom_violin(trim=FALSE)
-  labs(title="Population Distribution in California Counties \n 
+labs(title="Population Distribution in California Counties \n 
        Based on when they were established",
-       x="Established Before 1950",
-       y="Population") +
+     x="Established Before 1950",
+     y="Population") +
   theme_custom()
 ```
 
@@ -163,7 +163,7 @@ ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
 ##### Concept 5: Visualize - color by social media personality or not   and labels 
 ```{r}
 tiktok_df %>% 
-ggplot(aes(x=Followers_Millions, y=Likes_Billions, color=Is_Social_Media_Personality)) +
+  ggplot(aes(x=Followers_Millions, y=Likes_Billions, color=Is_Social_Media_Personality)) +
   geom_point() +
   labs(title="Followers vs Likes on TikTok",
        x="Number of Followers",

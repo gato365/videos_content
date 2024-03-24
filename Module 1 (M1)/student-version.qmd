@@ -70,66 +70,64 @@ Commonly used R packages include `ggplot2` for data visualization, `dplyr` for d
 #### **Part 2 (P2)** Data Types - Vectors and Data frames
 
 **How does this tie to the journey?**
-Version 1:
-Vectors and data frames are pivotal in navigating the data science landscape, serving as the bedrock for data manipulation and analysis within R. Vectors allow for the storage of homogenous data elements in an ordered sequence, enabling straightforward operations such as arithmetic calculations on numeric data, text manipulation on character strings, and logical operations for data filtering. Data frames expand on this by offering a two-dimensional, table-like structure where each column can hold data of varying types, mirroring the diversity found in real-world data. This facilitates complex data handling tasks like subsetting, merging, and aggregation, critical for preprocessing, exploratory analysis, and preparing datasets for modeling or visualization. Together, vectors and data frames empower data scientists to efficiently process, explore, and derive insights from data, forming the foundation upon which data-driven decisions are made and insights are uncovered.
+**"Imagine organizing your game inventory: Vectors in R are like backpack slots, holding similar items, while data frames are like chests for different items, aiding data scientists in managing vast info like gamers strategize to win!" 🎮📊**
 
-Version 2:
-
-"Imagine you're playing a video game where you need to organize your inventory. Vectors in R are like your backpack slots, where you put similar items together in a row, making it easy to count or swap them. Now, data frames are like having a bigger chest; you can store different kinds of items, like armor in one drawer and potions in another, but they're all in one place. This helps you manage your stuff better, especially when you have a lot of it, like the data scientists who collect tons of info. They use vectors and data frames to keep their data neat and figure out cool things from it, just like how you'd strategize in a game to win!" 🎮📊
-
+To create a new R code chunk in RStudio, you can use the shortcut:
+- **Mac**: Cmd + Option + I
+- **Windows/Linux**: Ctrl + Alt + I
 
 #### Concept 1: Variable Type
 
-- **What is a quantitative variable?**
-Quantitative variables represent measurable quantities as numbers, like height or weight.
+- **Categorical Variables**: Represent categories and can have more than two possible values, like species types in the iris dataset.
 ```{r}
-quant_var <- c(5.5, 6.0, 5.8) # Heights in feet
+cat_var <- iris$Species # Species in the iris dataset
 ```
 
-- **What is a categorical (binary) variable?**
-Categorical (binary) variables represent categories with two possible values, such as "Yes" or "No".
+- **Categorical (Binary) Variable**: A special case of categorical variables with two possible values, such as "Yes" or "No".
 ```{r}
-binary_var <- c(TRUE, FALSE, TRUE) # Binary or Boolean variables
+binary_var <- c("Yes", "No", "Yes") # Examples of binary variables
 ```
+
+
+- **Quantitative Variables**: Represent numeric values at which numeric operations make sense, like Sepal Length in the iris dataset.
+```{r}
+cat_var <- iris$Sepal.Length # Species in the iris dataset
+```
+
 
 #### Concept 2: Vectors
 
-- **What is a vector?**
-A vector is a basic data structure in R that contains elements of the same type.
+- **Introducing Vectors**: Vectors are the simplest way to store data in R, holding elements of the same type.
 ```{r}
-vec <- c(1, 2, 3) # Numeric vector
+num_vec <- c(1, 2, 3) # Numeric vector
+char_vec <- c("apple", "banana", "cherry") # Character vector
 ```
 
-- **What is a numeric vector?**
-A numeric vector is a vector that contains numeric values.
+- **Numeric Vector**: Contains numeric (quantitative) values.
 ```{r}
-num_vec <- c(1.1, 2.2, 3.3)
+num_vec <- c(1.1, 2.2, 3.3) # Example of a numeric vector
 ```
 
-- **What is a Boolean vector?**
-A Boolean vector is a vector that contains TRUE or FALSE values.
+- **Character Vector**: Holds text strings. In R, strings and characters are treated similarly, used for storing textual data.
 ```{r}
-bool_vec <- c(TRUE, FALSE, TRUE)
+char_vec <- c("apple", "banana", "cherry") # Example of a character vector
 ```
 
-- **What is a character vector?**
-A character vector is a vector that contains text strings.
+- **Accessing Vector Elements**: Elements within a vector can be accessed using square brackets `[]` and the index of the element.
 ```{r}
-char_vec <- c("apple", "banana", "cherry")
+char_vec[2] # Access the second element of char_vec
 ```
 
-- **How to access elements within a vector?**
-You can access elements within a vector by using square brackets `[]` with the index of the element(s) you want to access.
-```{r}
-vec[2] # Access the second element of vec
-```
+
+
+
 
 #### Concept 3: Data Frames
 
 - **What is a data frame?**
 A data frame is a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column.
 ```{r}
-df <- data.frame(Number = 1:3, Letter = c("A", "B", "C"))
+df <- data.frame(age = c(15,16,17), grade_in_class = c("A", "B", "A-"))
 ```
 
 - **What are rows?**
@@ -141,14 +139,18 @@ df[1, ] # Access the first row
 - **What are columns?**
 Columns in a data frame represent variables.
 ```{r}
-df[, "Number"] # Access the "Number" column
+df[, 1] # Access the "Number" column
 ```
 
 - **How to access rows and columns within a data frame?**
 You can access rows and columns within a data frame using square brackets `[,]` with row indices before the comma and column indices or names after the comma.
 ```{r}
-df[1, "Number"] # Access the first row and "Number" column
+df[1, 2] # Access the first row and "Number" column
 ```
+
+
+
+
 
 #### Concept 4: Lists
 
