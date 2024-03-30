@@ -410,7 +410,9 @@ This will create a boxplot for each is_thriller, allowing you to compare the rat
 #### **Part 1 (P1)** ET - Community Insights for Public Policy
 
 ---------------------------------------
+
 **How does this tie to the journey?**
+
 Picture yourself collaborating with state officials, wielding data to inform policy decisions. Your analysis of community demographics and needs illuminates the path to impactful legislation and improved civic life.
 ---------------------------------------
 ##### Concept 1: Extract - htmltab
@@ -422,13 +424,14 @@ Extracting data is our first step. We'll use a function similar to `htmltab` to 
 The `which` argument lets us specify which table on the page we're interested in, as pages often contain multiple tables.
 
 ```{r}
-library(htmltab)
+# library(htmltab)
+# library(dplyr)
 url <- "https://en.wikipedia.org/wiki/List_of_counties_in_California"
 california_counties_df <- htmltab(url, which = 2)
 
 
 california_counties_df <- california_counties_df %>% 
-  rename(Population = `Population(2022)`,
+  rename(Population = `Population(2023)`,
          Established = Est.)
 
 ```
@@ -441,6 +444,9 @@ First, we remove commas from the population figures, making them easier to work 
 Then, we convert the cleaned population data from strings to actual numeric values.
 
 ```{r}
+# library(stringr)
+## I am going to keep using clean clean_california_counties_df
+## This is not always done in the real world
 clean_california_counties_df <- california_counties_df %>%
   mutate(Population = str_remove_all(Population,",")) %>% 
   mutate(Population = as.numeric(Population))
@@ -451,42 +457,49 @@ clean_california_counties_df <- california_counties_df %>%
 
 ```{r}
 
+## To create more variables
 clean_california_counties_df <- clean_california_counties_df %>%
   mutate(State = "CA") %>% 
   mutate(Established = as.numeric(Established)) %>% 
-  mutate(Est_before_1950 = ifelse(Established<1950,"Yes","No"))
+  mutate(Est_before_1853 = ifelse(Established<=1853,"Yes","No"))
 
+## To make the code more neat
 clean_california_counties_df <- clean_california_counties_df %>% 
-  select(State, Population, County, Est_before_1950)
+  select(State, Population, County, Est_before_1853)
 
 ```
 
 
 
 ##### Concept 3: Visualize - geom violin plot
+
 A violin plot is a method of plotting numeric data and can be thought of as a combination of a box plot and a kernel density plot. It provides a deeper understanding of the distribution of the data.
 
 ```{r}
+
+library(ggplot2)
 clean_california_counties_df %>% 
-  ggplot(aes(x=Est_before_1950, y=Population)) + 
-  geom_violin(trim=FALSE)
+  ggplot(aes(x=Est_before_1853, y=Population)) + 
+  geom_violin(trim=FALSE) 
 ```
 
 This code will create a violin plot for the population of counties in California, giving a visual representation of the distribution of population sizes.
 
 ##### Concept 4: Visualize - labels & theme_custom
 
-Adding labels and themes can make your plots more informative and aesthetically pleasing. The `theme_bw()` function gives a clean, white background to your plots.
+Adding labels and themes can make your plots more informative and aesthetically pleasing. The `theme_custom()` function gives a clean, white background to your plots.
 
 ```{r}
+# library(scales)
+# library(gato365dsh2024)
 clean_california_counties_df %>% 
-  ggplot(aes(x=Est_before_1950, y=Population)) + 
-  geom_violin(trim=FALSE)
-labs(title="Population Distribution in California Counties \n 
-       Based on when they were established",
-     x="Established Before 1950",
-     y="Population") +
-  theme_custom()
+  ggplot(aes(x=Est_before_1853, y=Population)) + 
+  geom_violin(trim=FALSE) +
+  labs(title="Population Distribution in California Counties \n Based on when they were established",
+       x="Established Before 1853",
+       y="Population") #+
+# scale_y_continuous(labels = label_number(accuracy = 0.1)) +
+# theme_custom()
 ```
 
 This code will produce a violin plot with a title and axis labels, set against a clean, white background theme. It's a great way to present your data in a clear and professional manner.
@@ -505,14 +518,6 @@ This code will produce a violin plot with a title and axis labels, set against a
 As you dive into the world of social media analytics, your focus shifts to understanding the digital landscape. By examining the data from the most-followed TikTok accounts, you develop insights into online engagement trends. This knowledge helps you devise innovative approaches to digital marketing, ultimately enhancing the online presence and influence of your state's initiatives.
 ---------------------------------------
 
-```{r}
-library(htmltab)
-url <- "https://en.wikipedia.org/wiki/List_of_most-followed_TikTok_accounts"
-tiktok_df <- htmltab(url, which = 2)
-
-```
-
-
 
 ##### Concept 1: Extract the data
 
@@ -527,7 +532,8 @@ tiktok_df <- htmltab(url, which = 1)
 ##### Concept 2: Transform - mutate Followers and Likes into numeric
 
 ```{r}
-tiktok_df <- tiktok_df %>%
+## Again we 
+clean_tiktok_df <- tiktok_df %>%
   mutate(Followers_Millions = as.numeric(`Followers(millions)`)) %>%
   mutate(Likes_Billions = as.numeric(`Likes(billions)`))
 ```
@@ -536,7 +542,7 @@ tiktok_df <- tiktok_df %>%
 
 ##### Concept 3: Transform - str_detect: based on description detect if person is social media personality or not  
 ```{r}
-tiktok_df <- tiktok_df %>%
+clean_tiktok_df <- clean_tiktok_df %>%
   mutate(Is_Social_Media_Personality = ifelse(str_detect(Description, "Social media personality"), TRUE, FALSE))
 ```
 
@@ -547,8 +553,9 @@ tiktok_df <- tiktok_df %>%
 ##### Concept 4: Visualize - geom point: follower vs likes
 
 ```{r}
-##### Concept 5: Visualize - geom point: follower vs likes
-ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
+## 
+clean_tiktok_df %>% 
+  ggplot(aes(x=Followers_Millions, y=Likes_Billions)) +
   geom_point() + 
   theme_custom()
 ```
@@ -556,16 +563,18 @@ ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
 
 
 
-##### Concept 5: Visualize - color by social media personality or not   and labels 
+##### Concept 5: Visualize - color by social media personality or not and labels 
 ```{r}
-tiktok_df %>% 
+clean_tiktok_df %>% 
   ggplot(aes(x=Followers_Millions, y=Likes_Billions, color=Is_Social_Media_Personality)) +
   geom_point() +
+  # scale_color_manual(values=c("blue", "red")) +
   labs(title="Followers vs Likes on TikTok",
        x="Number of Followers",
        y="Number of Likes",
        color="Is Social Media Personality") +
   theme_custom()
+
 ```
 
 
@@ -593,7 +602,7 @@ Step into the virtual realm of a game developer. With data as your guide, explor
 
 ```{r}
 library(htmltab)
-games_df <- htmltab("https://en.wikipedia.org/wiki/2023_in_video_games", which = 4)
+games_2023_df <- htmltab("https://en.wikipedia.org/wiki/2023_in_video_games", which = 4)
 ```
 **Explanation**: `htmltab()` is used to extract data from HTML tables on web pages. Here, it retrieves the fourth table from the specified Wikipedia page, containing information about video games released in 2023.
 
@@ -602,7 +611,7 @@ games_df <- htmltab("https://en.wikipedia.org/wiki/2023_in_video_games", which =
 ```{r}
 library(lubridate)
 library(dplyr)
-fix_time_games_df <- games_df %>% 
+fix_time_games_2023_df <- games_2023_df %>% 
   mutate(Release = mdy(Release)) %>%  # Convert release date to Date format
   mutate(`Average score` = as.numeric(`Average score`)) %>%  # Convert average score to numeric
   rename(Average_Score = `Average score`, Platforms = `Platform(s)`)  # Rename columns for easier reference
@@ -612,10 +621,11 @@ fix_time_games_df <- games_df %>%
 - `mutate(Average score = as.numeric(Average score))`: Converts the "Average score" column to numeric type for calculations.
 - `rename()`: Renames columns to remove spaces and special characters, facilitating easier access and manipulation.
 
-##### Concept 2.1: Group by & Summarise
+##### Concept 3: Group by & Summarise
 
 ```{r}
-summary_df <- fix_time_games_df %>% 
+# summary_df <- 
+fix_time_games_2023_df %>% 
   group_by(Platforms) %>% 
   summarise(mean = mean(Average_Score, na.rm = TRUE),  # Calculate mean average score
             sd = sd(Average_Score, na.rm = TRUE),  # Calculate standard deviation
@@ -623,80 +633,52 @@ summary_df <- fix_time_games_df %>%
 ```
 **Explanation**: Groups the data by the gaming platform, then calculates the mean score, standard deviation, and sample size for each group. This is crucial for understanding score distribution across platforms.
 
-##### Concept 3: Visualize Data with `ggplot2` (Violin Plot)
+##### Concept 4: Visualize Data with `ggplot2` (Violin Plot)
 
 ```{r}
 library(ggplot2)
+library(gato365dsh2024)
 # Create a violin plot
-fix_time_games_df %>% 
+fix_time_games_2023_df %>% 
   ggplot(aes(x = Platforms, y = Average_Score)) +
   geom_violin() +
   labs(title = "Average Score by Platform", x = "Platform", y = "Average Score") +
-  ylim(88,100)  # Set Y-axis limits
+  # ylim(88,100) +  # Set Y-axis limits
+  theme_custom()
 ```
 **Explanation**: Creates a violin plot to visualize the distribution of average scores across different gaming platforms. Violin plots are useful for showing the density of the data at different values, combined with the box plot feature.
 
-##### Concept 4: Visualize Data - Add Mean
+##### Concept 5: Visualize Data - Add Mean
+
 
 ```{r}
-stat_summary(fun = mean, geom = "point", shape = 23, fill = "blue")  # Add mean score as a point
+fix_time_games_2023_df %>% 
+  ggplot(aes(x = Platforms, y = Average_Score)) +
+  geom_violin() +
+  labs(title = "Average Score by Platform", x = "Platform", y = "Average Score") +
+  ylim(88,100) +  # Set Y-axis limits
+  # stat_summary(fun = mean, geom = "point", shape = 23, fill = "blue") + # Add mean score as a point
+  theme_custom()
 ```
+
+
+
 **Explanation**: Enhances the violin plot by adding a point to represent the mean average score for each platform, providing a clear visual indicator of the central tendency within the distribution. 
 
 This breakdown transforms the script into a step-by-step data science workflow, demonstrating the journey from extracting web data to transforming and finally visualizing it in a meaningful way.
 
-##### Concept 5: Putting it all together
-```{r}
-library(htmltab)
-library(lubridate)
-library(dplyr)
-library(ggplot2)
-
-games_df <- htmltab("https://en.wikipedia.org/wiki/2023_in_video_games",which = 4)
-```
+##### Concept 6: Line Plot 
 
 
 ```{r}
-fix_time_games_df <- games_df %>% 
-  mutate(Release = mdy(Release)) %>% 
-  mutate(`Average score` = as.numeric(`Average score`)) %>% 
-  rename(Average_Score = `Average score`,
-         Platforms = `Platform(s)` )
-```
-
-
-```{r}
-fix_time_games_df %>% 
+fix_time_games_2023_df %>% 
   ggplot(aes(x = Release, y = Average_Score, color = Platforms)) +
   geom_point() +
   geom_line() +
+  # scale_x_date(date_breaks = "1 month", date_labels = "%b") + 
   labs(x = "Release Date", y = "Average Score", title = "Average Score by Platform over Time") +
   theme_custom()
 ```
-
-
-
-```{r}
-summary_df <- fix_time_games_df %>% 
-  group_by(Platforms) %>% 
-  summarise(mean = mean(Average_Score, na.rm = TRUE),
-            sd = sd(Average_Score, na.rm = TRUE), ss = n())
-```
-
-
-
-```{r}
-# Create a violin plot
-
-fix_time_games_df %>% 
-  ggplot( aes(x = Platforms, y = Average_Score)) +
-  geom_violin() +
-  stat_summary(fun = mean, geom = "point", shape = 23, fill = "blue") +
-  labs(title = "Average Score by Platform", x = "Platform", y = "Average Score")  +
-  ylim(88,100) +
-  theme_custom()
-```
-
 
 
 
@@ -710,12 +692,6 @@ fix_time_games_df %>%
 Transition to a social media strategist at the forefront of digital entertainment. By understanding viral trends through data, you craft content that not only entertains but becomes a cultural touchstone, propelling your brand to new heights.
 ---------------------------------------
 ##### Concept 1: Extract: htmltabs
-##### Concept 2: Transform: select, mutate
-##### Concept 3: Transform: select, filter
-##### Concept 4: Transform: select, filter, mutate
-##### Concept 5: Visualize
-
-
 
 ```{r}
 games_2022_df <- htmltab("https://en.wikipedia.org/wiki/2022_in_video_games",
@@ -726,6 +702,7 @@ games_2023_df <- htmltab("https://en.wikipedia.org/wiki/2023_in_video_games",
   mutate(Year = 2023)
 ```
 
+##### Concept 2: Transform: bind_row, mutate, & rename
 
 ```{r}
 games_bind_df <- games_2022_df %>% 
@@ -737,9 +714,7 @@ games_bind_df <- games_2022_df %>%
 ```
 
 
-
-
-
+##### Concept 3: Visualize
 ```{r}
 games_bind_df %>% 
   ggplot(aes(x = Release, y = Average_Score, color = Platforms)) +
@@ -750,16 +725,18 @@ games_bind_df %>%
   theme_custom()
 ```
 
+##### Concept 4: Group by & Summarize
 
 ```{r}
 games_bind_df %>% 
   group_by(Platforms,Year) %>% 
   summarise(mean = mean(Average_Score, na.rm = TRUE),
-            sd = sd(Average_Score, na.rm = TRUE), ss = n())
+            sd = sd(Average_Score, na.rm = TRUE), 
+            ss = n())
 ```
 
 
-
+##### Concept 5: Visualize
 ```{r}
 # Create a violin plot
 
@@ -780,52 +757,63 @@ games_bind_df %>%
 
 
 
+<!-- SECTION: Module 5 (M5) -->
+
+
 ## Weekend 2 Outline
 
-<!-- SECTION: Module 5 (M5) -->
+
 
 
 
 ### **Module 5 (M5) - Spotify I**
 
-*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
-1. **Artist Album Release Patterns**: How has the number of albums released by each artist changed over the years?
-- *Manipulation*: Group the data by artist and album release year, then count the number of albums.
-- *Visualization*: Create a line graph showing the number of albums released per year for each artist.
 
+#### **Part 1 (P1)** ETV - Spotify I
+**How does this tie to the journey?** As a Spotify data engineer, your role is pivotal in understanding the current trends of popular artists. By analyzing data such as user listening habits, artist popularity metrics, and song play counts, you can identify patterns and trends among these artists. These insights not only help Spotify curate better playlists and make more accurate song recommendations, but they also contribute to predicting future hits. Thus, your work directly influences the user experience on Spotify, making it more personalized and enjoyable for listeners worldwide. This is how your task ties into your journey as a data engineer at Spotify.
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+1. **Artist Album Release Patterns**: How has the number of tracks on albums released by each artist ("Dua Lipa" and "Olivia Rodrigo") changed over the years?
+- *Data Manipulation*: Filter the data for the artists "Dua Lipa" and "Olivia Rodrigo". Remove duplicate tracks based on track name, then group the data by artist and album name. Count the number of tracks on each album and record the album release year.
+- *Visualization*: Create a line graph showing the number of tracks on albums released per year for each artist. The lines are colored differently for each artist.
+
+
+##### The Extraction
 ```{r}
-all_artists_df %>% 
-  # distinct(artist, album, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
-  group_by(artist_name, album_release_year) %>%  # Group by artist and album year
-  summarise(count = n()) %>%  # Count the number of albums
+library(gato365dsh2024)
+library(dplyr)
+glimpse(all_artists_df)
+unique(all_artists_df$artist_name)
+```
+
+##### The Transformation
+```{r}
+library(ggplot2)
+artist_album_df <- all_artists_df %>% 
+  filter(artist_name %in% c("Dua Lipa","Olivia Rodrigo")) %>% 
+  distinct(track_name, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
+  group_by(artist_name, album_name) %>%  # Group by artist and album year
+  summarise(count = n(), album_release_year = first(album_release_year))  # Count the number of albums
+```
+
+
+##### The Visualization 
+```{r}
+artist_album_df %>% 
   ggplot(aes(x = album_release_year, y = count, group = artist_name, color = artist_name)) +  # Plot album_year on x-axis and count on y-axis, group and color by artist
   geom_line() +  # Use line graph
-  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Albums") +  # Add labels
+  geom_point() +
+  scale_color_manual(values = c("blue","green")) +
+  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Tracks on Albums", color = "Artist Name") +  # Add labels
   theme_custom()
 ```
 
 
-(Extend this for Part 2)
 
 
 
-#### **Part 1 (P1)** ET - Spotify I
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
 
-#### ----------------------------------
 
-#### **Part 2 (P2)** TV - Spotify I
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
 
 
 
@@ -856,6 +844,14 @@ all_artists_df %>%
 
 **How does this tie to the journey?**  
 Discovering the age landscape across NBA players provides insights into career longevity and the prime playing years, essential for team management and talent scouting.
+
+
+
+
+
+##### The Extraction
+##### The Transformation
+##### The Visualization
 
 ##### Concept 1: Removing Duplicates
 code:

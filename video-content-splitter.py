@@ -21,25 +21,33 @@ def split_quarto_content(filepath):
     
 
 # Function to write content to specific directories and files
+# Function to write content to specific directories and files
 def distribute_content(content_dict, base_dir='.', yaml_path='theyaml.yml'):
     # Read YAML content to prepend to each file
     with open(yaml_path, 'r', encoding='utf-8') as yaml_file:
         yaml_content = yaml_file.read()
     
     for section_name, data in content_dict.items():
+        # Extract section number from section_name
+        section_number = int(re.search(r'\d+', section_name).group())
+        
         # Define file paths based on section name
         answer_key_path = os.path.join(base_dir, section_name, 'answer-key.qmd')
         student_version_path = os.path.join(base_dir, section_name, 'student-version.qmd')
         fill_in_version_path = os.path.join(base_dir, section_name, 'fill_in-version.qmd')
         
-        # Ensure directory exists
-        os.makedirs(os.path.dirname(answer_key_path), exist_ok=True)
+        # Ensure directory exists for section 3 and above
+        if section_number >= 4:
+            os.makedirs(os.path.dirname(answer_key_path), exist_ok=True)
         
         # Write the same content to all versions for this example
         # In a real scenario, you would customize content per file
         for path in [answer_key_path, student_version_path, fill_in_version_path]:
             with open(path, 'w', encoding='utf-8') as file:
                 file.write(yaml_content + '\n' + data)
+
+
+
 
 
 # Main logic

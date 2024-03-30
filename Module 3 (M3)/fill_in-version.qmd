@@ -14,7 +14,9 @@ date: "Current Date Here"
 #### **Part 1 (P1)** ET - Community Insights for Public Policy
 
 ---------------------------------------
+
 **How does this tie to the journey?**
+
 Picture yourself collaborating with state officials, wielding data to inform policy decisions. Your analysis of community demographics and needs illuminates the path to impactful legislation and improved civic life.
 ---------------------------------------
 ##### Concept 1: Extract - htmltab
@@ -26,13 +28,14 @@ Extracting data is our first step. We'll use a function similar to `htmltab` to 
 The `which` argument lets us specify which table on the page we're interested in, as pages often contain multiple tables.
 
 ```{r}
-library(htmltab)
+# library(htmltab)
+# library(dplyr)
 url <- "https://en.wikipedia.org/wiki/List_of_counties_in_California"
 california_counties_df <- htmltab(url, which = 2)
 
 
 california_counties_df <- california_counties_df %>% 
-  rename(Population = `Population(2022)`,
+  rename(Population = `Population(2023)`,
          Established = Est.)
 
 ```
@@ -45,6 +48,9 @@ First, we remove commas from the population figures, making them easier to work 
 Then, we convert the cleaned population data from strings to actual numeric values.
 
 ```{r}
+# library(stringr)
+## I am going to keep using clean clean_california_counties_df
+## This is not always done in the real world
 clean_california_counties_df <- california_counties_df %>%
   mutate(Population = str_remove_all(Population,",")) %>% 
   mutate(Population = as.numeric(Population))
@@ -55,42 +61,49 @@ clean_california_counties_df <- california_counties_df %>%
 
 ```{r}
 
+## To create more variables
 clean_california_counties_df <- clean_california_counties_df %>%
   mutate(State = "CA") %>% 
   mutate(Established = as.numeric(Established)) %>% 
-  mutate(Est_before_1950 = ifelse(Established<1950,"Yes","No"))
+  mutate(Est_before_1853 = ifelse(Established<=1853,"Yes","No"))
 
+## To make the code more neat
 clean_california_counties_df <- clean_california_counties_df %>% 
-  select(State, Population, County, Est_before_1950)
+  select(State, Population, County, Est_before_1853)
 
 ```
 
 
 
 ##### Concept 3: Visualize - geom violin plot
+
 A violin plot is a method of plotting numeric data and can be thought of as a combination of a box plot and a kernel density plot. It provides a deeper understanding of the distribution of the data.
 
 ```{r}
+
+library(ggplot2)
 clean_california_counties_df %>% 
-  ggplot(aes(x=Est_before_1950, y=Population)) + 
-  geom_violin(trim=FALSE)
+  ggplot(aes(x=Est_before_1853, y=Population)) + 
+  geom_violin(trim=FALSE) 
 ```
 
 This code will create a violin plot for the population of counties in California, giving a visual representation of the distribution of population sizes.
 
 ##### Concept 4: Visualize - labels & theme_custom
 
-Adding labels and themes can make your plots more informative and aesthetically pleasing. The `theme_bw()` function gives a clean, white background to your plots.
+Adding labels and themes can make your plots more informative and aesthetically pleasing. The `theme_custom()` function gives a clean, white background to your plots.
 
 ```{r}
+# library(scales)
+# library(gato365dsh2024)
 clean_california_counties_df %>% 
-  ggplot(aes(x=Est_before_1950, y=Population)) + 
-  geom_violin(trim=FALSE)
-labs(title="Population Distribution in California Counties \n 
-       Based on when they were established",
-     x="Established Before 1950",
-     y="Population") +
-  theme_custom()
+  ggplot(aes(x=Est_before_1853, y=Population)) + 
+  geom_violin(trim=FALSE) +
+  labs(title="Population Distribution in California Counties \n Based on when they were established",
+       x="Established Before 1853",
+       y="Population") #+
+  # scale_y_continuous(labels = label_number(accuracy = 0.1)) +
+  # theme_custom()
 ```
 
 This code will produce a violin plot with a title and axis labels, set against a clean, white background theme. It's a great way to present your data in a clear and professional manner.
@@ -109,14 +122,6 @@ This code will produce a violin plot with a title and axis labels, set against a
 As you dive into the world of social media analytics, your focus shifts to understanding the digital landscape. By examining the data from the most-followed TikTok accounts, you develop insights into online engagement trends. This knowledge helps you devise innovative approaches to digital marketing, ultimately enhancing the online presence and influence of your state's initiatives.
 ---------------------------------------
 
-```{r}
-library(htmltab)
-url <- "https://en.wikipedia.org/wiki/List_of_most-followed_TikTok_accounts"
-tiktok_df <- htmltab(url, which = 2)
-
-```
-
-
 
 ##### Concept 1: Extract the data
 
@@ -131,7 +136,8 @@ tiktok_df <- htmltab(url, which = 1)
 ##### Concept 2: Transform - mutate Followers and Likes into numeric
 
 ```{r}
-tiktok_df <- tiktok_df %>%
+## Again we 
+clean_tiktok_df <- tiktok_df %>%
   mutate(Followers_Millions = as.numeric(`Followers(millions)`)) %>%
   mutate(Likes_Billions = as.numeric(`Likes(billions)`))
 ```
@@ -140,7 +146,7 @@ tiktok_df <- tiktok_df %>%
 
 ##### Concept 3: Transform - str_detect: based on description detect if person is social media personality or not  
 ```{r}
-tiktok_df <- tiktok_df %>%
+clean_tiktok_df <- clean_tiktok_df %>%
   mutate(Is_Social_Media_Personality = ifelse(str_detect(Description, "Social media personality"), TRUE, FALSE))
 ```
 
@@ -151,8 +157,9 @@ tiktok_df <- tiktok_df %>%
 ##### Concept 4: Visualize - geom point: follower vs likes
 
 ```{r}
-##### Concept 5: Visualize - geom point: follower vs likes
-ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
+## 
+clean_tiktok_df %>% 
+ggplot(aes(x=Followers_Millions, y=Likes_Billions)) +
   geom_point() + 
   theme_custom()
 ```
@@ -160,16 +167,18 @@ ggplot(tiktok_df, aes(x=Followers_Millions, y=Likes_Billions)) +
 
 
 
-##### Concept 5: Visualize - color by social media personality or not   and labels 
+##### Concept 5: Visualize - color by social media personality or not and labels 
 ```{r}
-tiktok_df %>% 
+clean_tiktok_df %>% 
   ggplot(aes(x=Followers_Millions, y=Likes_Billions, color=Is_Social_Media_Personality)) +
   geom_point() +
+  # scale_color_manual(values=c("blue", "red")) +
   labs(title="Followers vs Likes on TikTok",
        x="Number of Followers",
        y="Number of Likes",
        color="Is Social Media Personality") +
   theme_custom()
+
 ```
 
 
