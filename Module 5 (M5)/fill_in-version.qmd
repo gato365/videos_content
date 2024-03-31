@@ -14,44 +14,52 @@ date: "Current Date Here"
 
 ### **Module 5 (M5) - Spotify I**
 
-*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
-1. **Artist Album Release Patterns**: How has the number of albums released by each artist changed over the years?
-- *Manipulation*: Group the data by artist and album release year, then count the number of albums.
-- *Visualization*: Create a line graph showing the number of albums released per year for each artist.
 
+#### **Part 1 (P1)** ETV - Spotify I
+**How does this tie to the journey?** As a Spotify data engineer, your role is pivotal in understanding the current trends of popular artists. By analyzing data such as user listening habits, artist popularity metrics, and song play counts, you can identify patterns and trends among these artists. These insights not only help Spotify curate better playlists and make more accurate song recommendations, but they also contribute to predicting future hits. Thus, your work directly influences the user experience on Spotify, making it more personalized and enjoyable for listeners worldwide. This is how your task ties into your journey as a data engineer at Spotify.
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+1. **Artist Album Release Patterns**: How has the number of tracks on albums released by each artist ("Dua Lipa" and "Olivia Rodrigo") changed over the years?
+- *Data Manipulation*: Filter the data for the artists "Dua Lipa" and "Olivia Rodrigo". Remove duplicate tracks based on track name, then group the data by artist and album name. Count the number of tracks on each album and record the album release year.
+- *Visualization*: Create a line graph showing the number of tracks on albums released per year for each artist. The lines are colored differently for each artist.
+
+
+##### The Extraction
 ```{r}
-all_artists_df %>% 
-  # distinct(artist, album, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
-  group_by(artist_name, album_release_year) %>%  # Group by artist and album year
-  summarise(count = n()) %>%  # Count the number of albums
+library(gato365dsh2024)
+library(dplyr)
+glimpse(all_artists_df)
+unique(all_artists_df$artist_name)
+```
+
+##### The Transformation
+```{r}
+library(ggplot2)
+artist_album_df <- all_artists_df %>% 
+  filter(artist_name %in% c("Dua Lipa","Olivia Rodrigo")) %>% 
+  distinct(track_name, .keep_all = TRUE) %>%  # Remove duplicates based on artist and album
+  group_by(artist_name, album_name) %>%  # Group by artist and album year
+  summarise(count = n(), album_release_year = first(album_release_year))  # Count the number of albums
+```
+
+
+##### The Visualization 
+```{r}
+artist_album_df %>% 
   ggplot(aes(x = album_release_year, y = count, group = artist_name, color = artist_name)) +  # Plot album_year on x-axis and count on y-axis, group and color by artist
   geom_line() +  # Use line graph
-  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Albums") +  # Add labels
+  geom_point() +
+  scale_color_manual(values = c("blue","green")) +
+  labs(title = "Artist Album Release Patterns Over the Years", x = "Year", y = "Number of Tracks on Albums", color = "Artist Name") +  # Add labels
   theme_custom()
 ```
 
 
-(Extend this for Part 2)
 
 
 
-#### **Part 1 (P1)** ET - Spotify I
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
 
-#### ----------------------------------
 
-#### **Part 2 (P2)** TV - Spotify I
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
 
 
 

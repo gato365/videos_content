@@ -44,7 +44,7 @@ fix_time_games_2023_df <- games_2023_df %>%
 
 ```{r}
 # summary_df <- 
-  fix_time_games_2023_df %>% 
+fix_time_games_2023_df %>% 
   group_by(Platforms) %>% 
   summarise(mean = mean(Average_Score, na.rm = TRUE),  # Calculate mean average score
             sd = sd(Average_Score, na.rm = TRUE),  # Calculate standard deviation

@@ -11,13 +11,19 @@ date: "Current Date Here"
 
 ### **Module 7 (M7) - Spotify II**
 
+
+
+
+**How does this tie to the journey?** 
+
+
 *Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
 
+3. **Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
 
-**Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
 - *Manipulation*: Select the appropriate variables and filter based on the selected artists, Billie Ellish and Dua Lipa? 
-- *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
 
+- *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
 
 -------------------------
 

@@ -36,8 +36,8 @@ def distribute_content(content_dict, base_dir='.', yaml_path='theyaml.yml'):
         student_version_path = os.path.join(base_dir, section_name, 'student-version.qmd')
         fill_in_version_path = os.path.join(base_dir, section_name, 'fill_in-version.qmd')
         
-        # Ensure directory exists for section 3 and above
-        if section_number >= 4:
+        # Ensure directory exists for section 6 and above
+        if section_number >= 6:
             os.makedirs(os.path.dirname(answer_key_path), exist_ok=True)
         
         # Write the same content to all versions for this example

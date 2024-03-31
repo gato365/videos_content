@@ -830,76 +830,65 @@ artist_album_df %>%
 
 *Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
 
-
-#### **Module 6 (M6)**: Analyzing Player Age Distribution in the NBA
-
-*Purpose:* We aim to understand the age distribution of NBA players in 2023 and identify which age group dominates. Additionally, we'll explore how this distribution varies across different player positions.
-
-
-1a. **Age Distribution of Players**: How does the age distribution look across all players, and which age group is most prevalent?
-- *Manipulation*: Group the players by age and count the number of players in each age group.
-- *Visualization*: Create a histogram to display the age distribution.
-
 #### **Part 1 (P1)**: Understanding Age Distribution
 
-**How does this tie to the journey?**  
-Discovering the age landscape across NBA players provides insights into career longevity and the prime playing years, essential for team management and talent scouting.
+
+**How does this tie to the journey?** 
+
+As a data analyst for the NBA league, your role is crucial in understanding the age distribution of players. By analyzing player data, you can identify patterns and trends among different age groups. This insight not only helps in understanding the career longevity and prime playing years of players, but also aids in strategic team management and talent scouting. Thus, your work directly influences the strategic decisions made in the NBA league, contributing to the success of teams and the overall competitiveness of the league. This is how your task ties into your journey as a data analyst at the NBA.
+
+*Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
+
+2a. **Age Distribution of Players**: How does the age distribution look across all players, and which age group is most prevalent? 
+
+- *Data Manipulation*:  Group the players by age and count the number of players in each age group.
+
+- *Visualization*:  Create a histogram to display the age distribution.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 ##### The Extraction
+
+```{r}
+library(gato365dsh2024)
+library(dplyr)
+library(ggplot2)
+```
+
+
 ##### The Transformation
-##### The Visualization
-
-##### Concept 1: Removing Duplicates
-code:
-```{r}
-distinct(player_name, .keep_all = TRUE)
-```
-
-Purpose: Ensure each player is counted once, focusing on those with the most games played for accurate age analysis.
-
-##### Concept 2: Grouping by Age
-Code:
-```{r}
-mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE))
-```
-
-Purpose: Segment players into age groups for a structured analysis of age distribution.
-
-##### Concept 3: Counting Players per Age Group
-
-Code:
-```{r}
-group_by(age_group) %>% summarise(freq = n())
-```
-Purpose: Determine the number of players in each age group to identify the most prevalent age bracket.
-
-##### Concept 4: Visualizing Age Distribution
-
-code:
-```{r}
-ggplot(aes(x = age_group, y = freq)) + geom_bar(stat = "identity", fill = "steelblue")
-```
-Purpose: Create a histogram to visually represent the age distribution among NBA players in 2023.
-
-
-
-##### Concept 5: Everything Put together
 
 ```{r}
-nba_year_2023_df %>% 
+nba_players_age_df <- nba_year_2023_df %>% 
   distinct(player_name, .keep_all = TRUE) %>%  # Remove duplicates based on the player with the most games
   mutate(age_group = cut(age, breaks = seq(15, 50, 5), include.lowest = TRUE)) %>%  # Create arbitrary age groups
   group_by(age_group) %>%  # Group by age group
-  summarise(freq = n()) %>%  # Count the frequency in each group
+  summarise(freq = n()) 
+```
+##### The Visualization
+
+```{r}
+nba_players_age_df %>% 
   ggplot(aes(x = age_group, y = freq)) +  # Plot age_group on x-axis and frequency on y-axis
   geom_bar(stat = "identity", fill = "steelblue") +  # Use bar chart
   labs(title = "Age Distribution of NBA Players in 2023", x = "Age Group", y = "Number of Players") +  # Add labels
   theme_custom()
+
 ```
+
 
 
 
@@ -911,37 +900,7 @@ nba_year_2023_df %>%
 **How does this tie to the journey?**  
 Examining age distribution by player position uncovers patterns of career duration and potential position-specific physical demands, guiding strategic decisions in team composition and player development.
 
-##### Concept 1: Simplifying Position Data
 
-Code:
-```{r}
-mutate(position = str_split(position, "-", simplify = TRUE)[,1])
-```
-Purpose: Clarify player positions to ensure a clean, consistent dataset for analysis by focusing on primary positions.
-
-##### Concept 2: Grouping by Position and Age
-
-Code:
-```{r}
-group_by(position, age_group)
-```
-Purpose: Examine the age distribution within each player position, providing a nuanced view of age trends across different roles.
-
-##### Concept 3: Visualizing Age Distribution by Position
-
-Code:
-```{r}
-ggplot(aes(x = age_group, y = freq, fill = position)) + geom_bar(stat = "identity", position = "dodge")
-```
-Purpose: Use a dodged bar chart to compare age distribution across positions, highlighting differences in career trajectories and longevity among roles.
-
-
-
-
-
-
-
-##### Concept 4: Everything Put together  
 
 ```{r}
 ## 1b. **Age and Position Distribution of Players**: How does the age distribution look across all players conditioned on position?
@@ -988,13 +947,19 @@ nba_year_2023_df %>%
 
 ### **Module 7 (M7) - Spotify II**
 
+
+
+
+**How does this tie to the journey?** 
+
+
 *Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
 
+3. **Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
 
-**Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
 - *Manipulation*: Select the appropriate variables and filter based on the selected artists, Billie Ellish and Dua Lipa? 
-- *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
 
+- *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
 
 -------------------------
 

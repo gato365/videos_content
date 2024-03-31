@@ -102,8 +102,8 @@ clean_california_counties_df %>%
   labs(title="Population Distribution in California Counties \n Based on when they were established",
        x="Established Before 1853",
        y="Population") #+
-  # scale_y_continuous(labels = label_number(accuracy = 0.1)) +
-  # theme_custom()
+# scale_y_continuous(labels = label_number(accuracy = 0.1)) +
+# theme_custom()
 ```
 
 This code will produce a violin plot with a title and axis labels, set against a clean, white background theme. It's a great way to present your data in a clear and professional manner.
@@ -159,7 +159,7 @@ clean_tiktok_df <- clean_tiktok_df %>%
 ```{r}
 ## 
 clean_tiktok_df %>% 
-ggplot(aes(x=Followers_Millions, y=Likes_Billions)) +
+  ggplot(aes(x=Followers_Millions, y=Likes_Billions)) +
   geom_point() + 
   theme_custom()
 ```
