@@ -31,15 +31,33 @@ date: "Current Date Here"
 - *Visualization*: Create a scatter plot with touchdowns on the x-axis and interceptions on the y-axis, highlighting quarterbacks who meet the criteria.
 
 
+
+
+##### The Extraction
+
 ```{r}
-passing_stats_df %>% 
+library(tidyverse) ## ggplot2 and dplyr
+library(gato365dsh2024)
+```
+
+##### The Tranformation
+
+```{r}
+td_per_int_passing_df <- passing_stats_df %>% 
   distinct(.,.keep_all = TRUE) %>% 
   filter(year == 2023) %>% 
   select(player,int,td)  %>% 
   mutate(td_per_int = ifelse(int == 0, NA, td/int)) %>% 
   filter(td_per_int <=4 & td_per_int >=1) %>% 
   arrange(td_per_int) %>% 
-  mutate(player = factor(player, levels = unique(player))) %>% 
+  mutate(player = factor(player, levels = unique(player)))
+```
+
+##### The Visualization
+
+
+```{r}
+td_per_int_passing_df  %>% 
   ggplot(aes(x=player, y = td_per_int)) +
   geom_point() + 
   geom_text(aes(label=round(td_per_int, 2)), hjust=-0.1, vjust=-0.5) +
@@ -47,31 +65,6 @@ passing_stats_df %>%
   coord_flip() +
   theme_custom()
 ```
-
-
-
-
-#### **Part 1 (P1)** ET - Sports II
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
-
-
-#### ----------------------------------
-
-#### **Part 2 (P2)** TV - Sports II
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
-
-
-
 
 
 
@@ -88,6 +81,19 @@ passing_stats_df %>%
 
 
 ## Weekend 3 Outline
+
+
+More questions
+
+
+
+##### The Extraction
+
+##### The Tranformation
+
+##### The Visualization
+
+
 - Hackathon
 
 

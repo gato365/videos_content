@@ -955,71 +955,30 @@ nba_year_2023_df %>%
 
 *Purpose: What is Statistics/Data Science (DS) Question we want to answer?*
 
-3. **Danceability and Energy Correlation**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
+3. **Danceability and Energy relationship**: Is there a relationship between danceability and energy across all tracks using only Billie Ellish and Dua Lipa Songs?
 
 - *Manipulation*: Select the appropriate variables and filter based on the selected artists, Billie Ellish and Dua Lipa? 
 
 - *Visualization*: Use a scatter plot to visualize the relation between danceability and energy of Billie Ellish and Dua Lipa songs.
 
--------------------------
-
-#### Part 1 (P1): Danceability and Energy Relationship
-
-*Purpose: Explore the relationship between danceability and energy in tracks by Billie Eilish and Dua Lipa.*
-
-##### Concept 1: Data Selection and Filtering  
-Code: `dua_lipa_billie_eilish_energy_danceability_df <- all_artists_df %>% select(artist_name, energy, danceability) %>% filter(artist_name %in% c("Dua Lipa","Billie Eilish"))`  
-
-Purpose: This line selects the necessary variables (`artist_name`, `energy`, `danceability`) from a dataset and filters it to include only songs by Billie Eilish and Dua Lipa.
 
 
--------------------------
-
-##### Concept 2: Scatter Plot Visualization 
-Code: Part of the ggplot code - `ggplot(aes(x = energy, y = danceability, color = artist_name)) + geom_point()`  
-
-
-Purpose: Creates a scatter plot mapping `energy` to the x-axis and `danceability` to the y-axis, with points colored by artist, to visualize the relationship between these two variables.
-
--------------------------
-
-##### Concept 3: Adding Reference Lines  
+##### The Extraction
+```{r}
+library(gato365dsh2024)
+library(dplyr)
+library(ggplot2)
+```
 
 
-Code: Part of the ggplot code - `geom_vline(xintercept = 0.5) + geom_hline(yintercept = 0.5)`  
-
-
-Purpose: Adds vertical and horizontal lines at the intercepts of 0.5 to the scatter plot as reference points, helping to visually center the analysis around average values.
-
--------------------------
-
-
-##### Concept 4: Axis Limits 
-
-Code: Part of the ggplot code - `xlim(0,1) + ylim(0,1)`  
-
-Purpose: Restricts the plot's x and y axes to the range [0,1], ensuring that the visualization focuses on the valid range of values for `energy` and `danceability`.
-
-
--------------------------
-
-
-##### Concept 5: Custom Theme Application 
-
-Code: Part of the ggplot code - `theme_custom()`  
-
-
-Purpose: Applies a custom theme to the plot, enhancing readability and aesthetic appeal according to predefined styling rules. (Note: `theme_custom()` is assumed to be a predefined ggplot theme function created by the user.)
-
-
-##### Concept 6: Everything Put together
+##### The Tranformation
 ```{r}
 dua_lipa_billie_eilish_energy_danceability_1_df <- all_artists_df %>% 
   select(artist_name, energy,danceability) %>% 
   filter(artist_name %in% c("Dua Lipa","Billie Eilish")) 
 ```
 
-
+##### The Visualization
 ```{r}
 dua_lipa_billie_eilish_energy_danceability_1_df %>% 
   ggplot(aes(x = energy, y = danceability, color = artist_name)) +
@@ -1030,54 +989,6 @@ dua_lipa_billie_eilish_energy_danceability_1_df %>%
   ylim(0,1)+
   theme_custom()
 ```
-
-#### ----------------------------------
-
-
-#### Part 2 (P2): Combining Artist Data
-
-*Purpose: Investigate how data integration affects analysis by combining song data from Dua Lipa and Billie Eilish.*
-
-##### Concept 1: Data Binding 
-Code: `dua_lipa_billie_eilish_energy_danceability_df <- dua_lipa_df %>% bind_rows(billie_eilish_df) %>% select(artist_name, energy, danceability)`  
-Purpose: Combines (binds) rows from separate data frames for Dua Lipa and Billie Eilish into a single data frame and selects relevant variables, showcasing how to merge datasets for integrated analysis.
-
-This structure provides a clear educational pathway from understanding the individual components of data manipulation and visualization to seeing the effects of combining data sets on analysis outcomes.
-
-##### Concept 2: Everything Put together
-
-```{r}
-dua_lipa_billie_eilish_energy_danceability_2_df <- dua_lipa_df %>% 
-  bind_rows(billie_eilish_df) %>% 
-  select(artist_name, energy,danceability) 
-```
-
-
-```{r}
-dua_lipa_billie_eilish_energy_danceability_2_df %>% 
-  ggplot(aes(x = energy, y = danceability, color = artist_name)) +
-  geom_point() +
-  geom_vline(xintercept = 0.5) +
-  geom_hline(yintercept = 0.5) +
-  xlim(0,1) +
-  ylim(0,1)+
-  theme_custom()
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1111,15 +1022,33 @@ dua_lipa_billie_eilish_energy_danceability_2_df %>%
 - *Visualization*: Create a scatter plot with touchdowns on the x-axis and interceptions on the y-axis, highlighting quarterbacks who meet the criteria.
 
 
+
+
+##### The Extraction
+
 ```{r}
-passing_stats_df %>% 
+library(tidyverse) ## ggplot2 and dplyr
+library(gato365dsh2024)
+```
+
+##### The Tranformation
+
+```{r}
+td_per_int_passing_df <- passing_stats_df %>% 
   distinct(.,.keep_all = TRUE) %>% 
   filter(year == 2023) %>% 
   select(player,int,td)  %>% 
   mutate(td_per_int = ifelse(int == 0, NA, td/int)) %>% 
   filter(td_per_int <=4 & td_per_int >=1) %>% 
   arrange(td_per_int) %>% 
-  mutate(player = factor(player, levels = unique(player))) %>% 
+  mutate(player = factor(player, levels = unique(player)))
+```
+
+##### The Visualization
+
+
+```{r}
+td_per_int_passing_df  %>% 
   ggplot(aes(x=player, y = td_per_int)) +
   geom_point() + 
   geom_text(aes(label=round(td_per_int, 2)), hjust=-0.1, vjust=-0.5) +
@@ -1127,31 +1056,6 @@ passing_stats_df %>%
   coord_flip() +
   theme_custom()
 ```
-
-
-
-
-#### **Part 1 (P1)** ET - Sports II
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
-
-
-#### ----------------------------------
-
-#### **Part 2 (P2)** TV - Sports II
-**How does this tie to the journey?**
-##### Concept 1:
-##### Concept 2:
-##### Concept 3:
-##### Concept 4:
-##### Concept 5:
-
-
-
 
 
 
@@ -1168,6 +1072,19 @@ passing_stats_df %>%
 
 
 ## Weekend 3 Outline
+
+
+More questions
+
+
+
+##### The Extraction
+
+##### The Tranformation
+
+##### The Visualization
+
+
 - Hackathon
 
 
